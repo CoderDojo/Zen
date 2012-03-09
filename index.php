@@ -38,7 +38,14 @@ if (defined('ENVIRONMENT'))
 	
 		case 'testing':
 		case 'production':
-			error_reporting(0);
+            error_reporting(0);
+
+            if (extension_loaded('redis')) {
+                ini_set('session.save_handler', 'redis');
+                ini_set('session.save_path', 'tcp://{HOSTNAME}:{PORT}?auth={PASSWORD}');
+            }
+            // This removes all caching on orchestra.io
+            setcookie('_orchestra', '1', time()+60*60*8);
 		break;
 
 		default:
