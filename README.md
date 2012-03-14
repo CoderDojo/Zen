@@ -11,7 +11,7 @@ a pull request back to us!
 - If country == US, have states also.
 
 ### Zen is built on and uses: 
-- CodeIgnitor http://codeigniter.com/
+- CodeIgniter http://codeigniter.com/
 - Tank Auth http://www.konyukhov.com/soft/tank_auth/
 - Twitter Bootstrap http://twitter.github.com/bootstrap/
 
