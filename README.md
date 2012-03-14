@@ -16,4 +16,6 @@ a pull request back to us!
 - Twitter Bootstrap http://twitter.github.com/bootstrap/
 
 ### Local deployment notes 
-	Be sure to create a MySQL database wth the schema in '/schema.sql', then fill in the details in '/application/config/database.php'. Be sure also to enter an encryption ke in '/application/config/config.php' on line 227, as Zen uses the session class. You will also need reCaptcha keys from https://www.google.com/recaptcha/admin/create for the captcha used through the app, fill in the keys on lines 131 and 132 in '/application/config/tank_auth.php'. Also note  .htaccess is used to mask the 'index.php' part of the URL, depending on your set up, you may need to edit this. 
+- Be sure to create a MySQL database wth the schema in `'/schema.sql'`, then fill in the details in  `'/application/config/database.php'`. Be sure also to enter an encryption key in `'/application/config/config.php'` on line 227, as Zen uses the session class.
+- You will also need reCaptcha keys from https://www.google.com/recaptcha/admin/create for the captcha used through the app, fill in the keys on lines 131 and 132 in `'/application/config/tank_auth.php'`.
+- Also note `.htaccess` is used to mask the `'index.php'` part of the URL, depending on your set up, you may need to edit this. 
