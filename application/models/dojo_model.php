@@ -27,9 +27,28 @@ class Dojo_Model extends CI_Model
 			$this->db->where('verified', FALSE);
 		}
 
-		$this->db->order_by('country', 'asc');
+		$this->db->select('D.name,
+											D.creator,
+											D.time,
+											D.country,
+											D.location,
+											D.coordinates,
+											D.email,
+											D.google_group,
+											D.twitter,
+											D.notes,
+											D.eb_id,
+											D.need_mentors,
+											D.stage,
+											D.supporter_image,
+											C.name AS country_name');
+		$this->db->from('dojos D');
+		$this->db->join('countries C', 'C.code = D.id', 'left');
+		$this->db->order_by('country_name', 'asc');
 		$this->db->order_by('name', 'asc');
-		$query = $this->db->get($this->dojo_table);
+
+		//$query = $this->db->get($this->dojo_table);
+		$query = $this->db->get();
 		return $query->result();
 	}
 
