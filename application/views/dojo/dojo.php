@@ -241,7 +241,7 @@
                   "EH" => "Western Sahara",
                   "YE" => "Yemen",
                   "YU" => "Yugoslavia",
-                  "ZM" => "Zambia", 
+                  "ZM" => "Zambia",
                   "ZW" => "Zimbabwe"
                 );
                 $used_countries = array();
@@ -249,12 +249,9 @@
                 foreach($dojo_data as $dojo){
                     if (!in_array($dojo->country, $used_countries)){
                         $used_countries[] = $dojo->country;
-                        echo "<br /><legend style='margin-bottom:5px;'>".$_countries[$dojo->country]."</legend>";
-                        echo "&bull; <a href='/dojo/".$dojo->id."'>".$dojo->name."</a><br />";
+                        echo "<br /><legend style='margin-bottom:5px;'>".$dojo->country_name."</legend>";
                     }
-                    else{
-                        echo "&bull; <a href='/dojo/".$dojo->id."'>".$dojo->name."</a><br />";
-                    }
+										echo "&bull; <a href='/dojo/".$dojo->id."'>".$dojo->name."</a><br />";
                 }
             ?>
         </div>

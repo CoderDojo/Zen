@@ -18,7 +18,7 @@ class Dojo_Model extends CI_Model
 		if ($id) {
 			$this->db->where('id', $id);
 		}
-		
+
 		if ($verified){
 			$this->db->where('verified', TRUE);
 		}
@@ -27,8 +27,28 @@ class Dojo_Model extends CI_Model
 			$this->db->where('verified', FALSE);
 		}
 
-		$this->db->order_by('country', 'desc');
-		$query = $this->db->get($this->dojo_table);
+		$this->db->select('D.name,
+											D.creator,
+											D.time,
+											D.country,
+											D.location,
+											D.coordinates,
+											D.email,
+											D.google_group,
+											D.twitter,
+											D.notes,
+											D.eb_id,
+											D.need_mentors,
+											D.stage,
+											D.supporter_image,
+											C.name AS country_name');
+		$this->db->from('dojos D');
+		$this->db->join('countries C', 'C.code = D.id', 'left');
+		$this->db->order_by('country_name', 'asc');
+		$this->db->order_by('name', 'asc');
+
+		//$query = $this->db->get($this->dojo_table);
+		$query = $this->db->get();
 		return $query->result();
 	}
 
@@ -142,7 +162,7 @@ class Dojo_Model extends CI_Model
     {
         if($dojo){
             $this->db->set('verified', 1);
-        
+
             if(is_array($dojo)){
                 foreach($dojo as $d){
                     $this->db->or_where('id', $d);
