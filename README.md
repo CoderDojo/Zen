@@ -35,6 +35,7 @@ a pull request back to us!
 
 ```
     <Directory /home/arnouten/dev/Zen>
+      AllowOverride All
       Require all granted
     </Directory>
     #Alias /Zen /home/arnouten/dev/Zen
