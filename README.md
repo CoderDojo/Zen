@@ -29,4 +29,13 @@ a pull request back to us!
 - configure reCaptcha
   - get reCaptcha keys from https://www.google.com/recaptcha/admin/create for the captcha used through the app
   - fill in the keys on lines 131 and 132 in `'/application/config/tank_auth.php'`.
-- Also note `.htaccess` is used to mask the `'index.php'` part of the URL, depending on your set up, you may need to edit this. 
+- Configure a webserver
+  - install apache (sometimes known as 'httpd')
+  - add a new configuration file at /etc/httpd/conf.d/zen.conf
+
+    <Directory /home/arnouten/dev/Zen>
+      Require all granted
+    </Directory>
+    Alias /Zen /home/arnouten/dev/Zen
+
+  - Note `.htaccess` is used to mask the `'index.php'` part of the URL, depending on your set up, you may need to edit this. 
