@@ -1,0 +1,15 @@
+*CoderDojo Zen*
+Initial release is to a basic Dojo listing manager.
+Plans to enhance and add features down the line
+
+*Zen is built on and uses: *
+* CodeIgnitor http://codeigniter.com/
+* Tank Auth http://www.konyukhov.com/soft/tank_auth/
+* Twitter Bootstrap http://twitter.github.com/bootstrap/
+
+*Sensitive information in files: *
+* application/config/database.php (Orchestra DB login)
+* application/config/email.php (SendGrid's SMTP password & username)
+* application/config/tank_auth.php (reCaptcha keys)
+(make sure we deal with this prior to open sourcing)
+

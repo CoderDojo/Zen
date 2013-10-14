@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "home";
+$route['default_controller'] = "dojo/index";
 $route['404_override'] = '';
 $route['profile/(:any)'] = "profile";
 

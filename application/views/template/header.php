@@ -3,6 +3,11 @@
         <title>CoderDojo Zen</title>
         <link rel="stylesheet" href="/static/css/styles.css">
         <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/libs/bootstrap-dropdown.js"></script>
+        <script type="text/javascript">
+            $('.dropdown-toggle').dropdown('toggle');
+        </script>
     </head>
     <body>
     <div id="top-bar">
@@ -10,13 +15,15 @@
 		    <ul id="menu-top-menu">
                 <li><a href="/"><img src="http://coderdojo.com/wp-content/themes/collective/images/logo.png" height="30" style="margin-top: -3px;"></a></li>
                 <li><a href="/dojo">Dojo List</a></li>
-		<?php if (isset($username)) {
-		       if($user_data->dojo){?>
-                <li><a href="/dojo/edit">Edit My Dojo</a></li>
-                <li><a href="/dojo/<?=$user_data->dojo;?>">Dojo Profile</a></li>
-                <?php } else { ?>
+		<?php if (isset($username)) { ?>
+                <li><a href="/dojo/my">My Dojos</a></li>
                 <li><a href="/dojo/create">Create a Dojo</a></li>
-                <?php } }?>
+                <?php if($user_data->role == 0): ?>
+                <li><a href="#">&bull; Admin:</a></li>
+                <li><a href="/admin/dojos">Dojos</a></li>
+                <li><a href="/admin">Verify</a></li>
+                <li><a href="/admin/stats">Stats</a></li>
+                <?php endif; } ?>
             </ul>
             <ul class="fr">
                 <?php if (isset($username)) {?>
@@ -29,4 +36,3 @@
 			<div class="clear"></div>
 		</div><!--wrap-->
 	</div>
-

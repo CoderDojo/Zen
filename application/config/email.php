@@ -11,10 +11,10 @@
 |
 */
 $config['protocol'] = 'smtp';
-$config['smtp_host'] = '';
+$config['smtp_host'] = 'localhost';
 $config['smtp_user'] = '';
 $config['smtp_pass'] = '';
-$config['smtp_port'] = '';
+$config['smtp_port'] = '25';
 $config['crlf'] = "\r\n";
 $config['newline'] = "\r\n";
 

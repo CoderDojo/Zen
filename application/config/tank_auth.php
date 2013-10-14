@@ -127,9 +127,10 @@ $config['captcha_case_sensitive'] = TRUE;
 |--------------------------------------------------------------------------
 */
 
+//Registered under Google account admin@coderdojo.com (James') and for domain 'zen.coderdojo.com' (Global key)
 $config['use_recaptcha'] = TRUE;
-$config['recaptcha_public_key'] = '';
-$config['recaptcha_private_key'] = '';
+$config['recaptcha_public_key'] = '6LfSpM4SAAAAAGwMsXQKfIxVtWUlaf-_SlPMrc8v';
+$config['recaptcha_private_key'] = '6LfSpM4SAAAAAJptSFJphdvGmMqqR6Qm5waF_qHw';
 
 /*
 |--------------------------------------------------------------------------
