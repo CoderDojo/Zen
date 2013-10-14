@@ -449,3 +449,17 @@ a:hover {
     color: #ff1300;
     font-style: italic;
 }
+
+/* Verification fields */
+.verif {
+	width:50px;
+}
+.verif-0 {
+	background-color: #fcc;
+}
+.verif-1 {
+	background-color: #cfc;
+}
+.verif-2 {
+	background-color: #ffc;
+}

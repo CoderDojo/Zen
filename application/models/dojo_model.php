@@ -4,7 +4,7 @@ class Dojo_Model extends CI_Model
 {
 	private $error = array();
 	private $dojo_table = "dojos";
-	private $user_profile_table = "user_profiles";
+	private $user_dojo_table = "user_dojos";
 
 	function __construct(){
 		parent::__construct();
@@ -14,41 +14,58 @@ class Dojo_Model extends CI_Model
 	 * Return data from existing dojo
 	 *
 	 */
-	function get($id = NULL, $verified = NULL, $unverified = NULL){
+	function get($id = NULL, $verified = NULL, $unverified = NULL, $where = array() ){
 		if ($id) {
 			$this->db->where('id', $id);
 		}
-
+		
 		if ($verified){
-			$this->db->where('verified', TRUE);
+			$this->db->where('verified', 1);
 		}
 
         if ($unverified){
-			$this->db->where('verified', FALSE);
+			$this->db->where('verified !=',1);
+		}
+		
+		foreach($where as $key => $val) {
+		    $this->db->where($key,$val);
+		}
+		
+		$this->db->where('deleted',0);
+		$this->db->order_by('country desc, name asc');
+		$query = $this->db->get($this->dojo_table);
+		return $query->result();
+	}
+	
+	function get_with_user($id = NULL, $verified = NULL, $unverified = NULL){
+	    $this->db->select('users.email as useremail, dojos.id as dojoid, name, country, dojos.email as dojoemail, verified');
+		if ($id) {
+			$this->db->where('dojos.id', $id);
+		}
+		
+		if ($verified){
+			$this->db->where('dojos.verified', 1);
 		}
 
-		$this->db->select('D.name,
-											D.creator,
-											D.time,
-											D.country,
-											D.location,
-											D.coordinates,
-											D.email,
-											D.google_group,
-											D.twitter,
-											D.notes,
-											D.eb_id,
-											D.need_mentors,
-											D.stage,
-											D.supporter_image,
-											C.name AS country_name');
-		$this->db->from('dojos D');
-		$this->db->join('countries C', 'C.code = D.id', 'left');
-		$this->db->order_by('country_name', 'asc');
-		$this->db->order_by('name', 'asc');
+        if ($unverified){
+			$this->db->where('dojos.verified !=',1);
+		}
+		
+		$this->db->join("users", "dojos.creator = users.id");
+		
+		$this->db->where('dojos.deleted',0);
+		$this->db->order_by('dojos.id desc');
+		$query = $this->db->get($this->dojo_table);
+		return $query->result();
+	}
+	
+	function get_by_user($user_id) {
+	    $this->db->join($this->dojo_table,'user_dojos.dojo_id = dojos.id');
 
-		//$query = $this->db->get($this->dojo_table);
-		$query = $this->db->get();
+		$this->db->where('user_dojos.user_id',$user_id);
+		$this->db->where('deleted',0);
+		$this->db->order_by('id asc');
+		$query = $this->db->get($this->user_dojo_table);
 		return $query->result();
 	}
 
@@ -56,7 +73,7 @@ class Dojo_Model extends CI_Model
 	 * Create a dojo listing
 	 *
 	 */
-	function create($name, $time, $country, $location, $coordinates, $email, $google_group, $twitter, $notes, $eb_id, $need_mentors, $stage, $supporter_image, $user_id){
+	function create($name, $time, $country, $location, $coordinates, $email, $google_group, $website, $twitter, $notes, $eb_id, $need_mentors, $stage, $supporter_image, $user_id){
 		if ((strlen($name) > 0) AND !$this->is_name_available($name)) {
 			$this->error = array('dojo_name' => 'Dojo Name is use, pick another');
 		} else {
@@ -69,6 +86,7 @@ class Dojo_Model extends CI_Model
 			'coordinates' => $coordinates,
 			'email' => $email,
 			'google_group' => $google_group,
+			'website' => $website,
 			'twitter' => $twitter,
 			'notes' => $notes,
 			'eb_id' => $eb_id,
@@ -79,7 +97,7 @@ class Dojo_Model extends CI_Model
 
 			$query = $this->db->insert($this->dojo_table, $data);
 			$insert_id = $this->db->insert_id();
-			$this->update_user_dojo($insert_id, $user_id);
+			$this->update_user_dojo($insert_id, $user_id, true /* is owner*/);
 			return $insert_id;
 		}
 		return NULL;
@@ -89,7 +107,7 @@ class Dojo_Model extends CI_Model
 	 * Update existing dojo listing
 	 *
 	 */
-	function update($id, $name, $time, $country, $location, $coordinates, $email, $google_group, $twitter, $notes, $eb_id, $need_mentors, $stage, $supporter_image){
+	function update($id, $name, $time, $country, $location, $coordinates, $email, $google_group, $website, $twitter, $notes, $eb_id, $need_mentors, $stage, $supporter_image){
 
 		$dojo_data = $this->get($id);
 
@@ -97,6 +115,7 @@ class Dojo_Model extends CI_Model
 			$this->error = array('dojo_name' => 'Dojo Name is use, pick another');
 		} else{
 			$this->db->where('id', $id);
+			$this->db->where('deleted',0);
 
 			$data = array(
 			'name' => $name,
@@ -106,6 +125,7 @@ class Dojo_Model extends CI_Model
 			'coordinates' => $coordinates,
 			'email' => $email,
 			'google_group' => $google_group,
+			'website' => $website,
 			'twitter' => $twitter,
 			'notes' => $notes,
 			'eb_id' => $eb_id,
@@ -133,6 +153,7 @@ class Dojo_Model extends CI_Model
 	{
 		$this->db->select('1', FALSE);
 		$this->db->where('LOWER(name)=', strtolower($name));
+		$this->db->where('deleted',0);
 
 		$query = $this->db->get($this->dojo_table);
 		return $query->num_rows() == 0;
@@ -144,12 +165,15 @@ class Dojo_Model extends CI_Model
 	 * @param	string
 	 * @return	bool
 	 */
-	function update_user_dojo($dojo_id, $user_id)
+	function update_user_dojo($dojo_id, $user_id, $owner = false)
 	{
-		$this->db->set('dojo', $dojo_id);
-		$this->db->where('user_id', $user_id);
-
-		$this->db->update($this->user_profile_table);
+		$this->db->set(array('user_id'=>$user_id,'dojo_id'=>$dojo_id,'owner'=>$owner));
+		$this->db->insert($this->user_dojo_table);
+	}
+	function remove_user_dojo($dojo_id, $user_id)
+	{
+		$this->db->where(array('user_id'=>$user_id,'dojo_id'=>$dojo_id));
+		$this->db->delete($this->user_dojo_table);
 	}
 
     /**
@@ -158,23 +182,48 @@ class Dojo_Model extends CI_Model
 	 * @param	string || array
 	 * @return	bool
 	 */
-	function verify($dojo = NULL)
+	function verify($dojo = NULL, $state, $user)
     {
         if($dojo){
-            $this->db->set('verified', 1);
-
-            if(is_array($dojo)){
-                foreach($dojo as $d){
-                    $this->db->or_where('id', $d);
-                }
+            $this->db->set('verified', $state);
+            if($state == 1) {
+              $this->db->set('verified_at', "NOW()", false);
+              $this->db->set('verified_by', $user);
             }
-            else {
+    
+            $this->db->where('id', $dojo);
 
-                $this->db->where('id', $dojo);
-            }
-
+            $this->db->where('deleted',0);
             $this->db->update($this->dojo_table);
         }
+	}
+	
+	function delete($dojo, $user)
+    {
+        $this->db->set('deleted', 1);
+        $this->db->set('deleted_at', "NOW()", false);
+        $this->db->set('deleted_by', $user);
+    
+        $this->db->where('id', $dojo);
+
+        $this->db->where('deleted',0);
+        $this->db->update($this->dojo_table);
+        
+        $this->remove_user_dojo($dojo,$user);
+	}
+	
+	function user_can_edit_dojo($user_id,$dojo_id) {
+		$this->db->where('user_dojos.user_id',$user_id);
+		$this->db->where('user_dojos.dojo_id',$dojo_id);
+		$query = $this->db->get($this->user_dojo_table);
+		return $query->num_rows()===0?false:true;
+	}
+	function user_owns_dojo($user_id,$dojo_id) {
+	    $this->db->where('user_dojos.owner',true);
+		$this->db->where('user_dojos.user_id',$user_id);
+		$this->db->where('user_dojos.dojo_id',$dojo_id);
+		$query = $this->db->get($this->user_dojo_table);
+		return $query->num_rows()===0?false:true;
 	}
 
 	/**
