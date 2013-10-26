@@ -3,12 +3,13 @@
         <div class="col">
             <legend>Verified Dojos</legend>
             <table id="vfy-dojo-table" class="table">
-                <?php $total = 0;
+                <?php $total = 0; $num_countries = 0;
                 foreach(count_by_continent_country($verified_dojos) as $continent => $countries): ?>
                     <tr>
                         <th><?=$continent?></th>
                         <th><?=array_sum($countries)?></th>
                         <?php $total += array_sum($countries); ?>
+                        <?php $num_countries += count($countries); ?>
                     </tr>
                     <?php foreach($countries as $country => $dojos): ?>
                         <tr>
@@ -21,17 +22,22 @@
                     <th>Total</th>
                     <th><?=$total?></th>
                 </tr>
+                <tr>
+                    <th>Total Countries</th>
+                    <th><?=$num_countries?></th>
+                </tr>
             </table>
         </div>
         <div class="col">
             <legend>All Dojos</legend>
             <table id="all-dojo-table" class="table">
-                <?php $total = 0;
+                <?php $total = 0; $num_countries = 0;
                 foreach(count_by_continent_country($all_dojos) as $continent => $countries): ?>
                     <tr>
                         <th><?=$continent?></th>
                         <th><?=array_sum($countries)?></th>
                         <?php $total += array_sum($countries); ?>
+                        <?php $num_countries += count($countries); ?>
                     </tr>
                     <?php foreach($countries as $country => $dojos): ?>
                         <tr>
@@ -43,6 +49,10 @@
                 <tr>
                     <th>Total</th>
                     <th><?=$total?></th>
+                </tr>
+                <tr>
+                    <th>Total Countries</th>
+                    <th><?=$num_countries?></th>
                 </tr>
             </table>
         </div>

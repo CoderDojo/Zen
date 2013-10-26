@@ -125,13 +125,6 @@ $supporter_image = array(
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="country">Country</label>
-                        <div class="controls">
-                              <?=form_dropdown('country', get_countries(), set_value('country'), 'style = "width:270px;"');?>
-                              <p class="help-block"><div class="error-text"> <?php echo form_error($country['name']); ?><?php echo isset($errors[$country['name']])?$errors[$country['name']]:''; ?></div></p>
-                        </div>
-                    </div>
-                    <div class="control-group">
                         <label class="control-label" for="email">Email *</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="email" name="email" value="<?=$email['value'];?>">
@@ -154,11 +147,22 @@ $supporter_image = array(
                            <div class="error-text"><?php echo form_error($location['name']); ?><?php echo isset($errors[$location['name']])?$errors[$location['name']]:''; ?></div> <p class="help-block">Address of the Dojo (Eg. <i>LIT Downtown Centre, George's Quay, Limerick</i>)</p>
                         </div>
                     </div>
-                    
+                    <div class="control-group">
+                        <label class="control-label" for="country">Country</label>
+                        <div class="controls">
+                              <?=form_dropdown('country', array_merge(array(''=>'Select country...'), get_countries()), set_value('country'), 'style="width:270px;" id="country"');?>
+                              <p class="help-block"><div class="error-text"> <?php echo form_error($country['name']); ?><?php echo isset($errors[$country['name']])?$errors[$country['name']]:''; ?></div></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                    </div>
                     <div class="control-group">
                         <label class="control-label" for="coordinates">Coordinates</label>
                         <div class="controls">
+                            <input type="button" class="btn btn-primary btn-large" id="guessAddress" value="Get location from address" style="margin-bottom:10px;">
+                          <div id="mapCanvas" style="height:350px;width:425px;margin-bottom:10px;"></div>
                            <input type="text" class="input-xlarge" id="coordinates" name="coordinates" value="<?=$coordinates['value'];?>">
+                           <input type="button" class="btn btn-primary" id="getCoords" value="Get from Map">
                            <div class="error-text"><?php echo form_error($coordinates['name']); ?><?php echo isset($errors[$coordinates['name']])?$errors[$coordinates['name']]:''; ?></div><p class="help-block">Coordinates of Dojo Location for Google Map (Eg. <i>51.888054,-8.403111</i>), <a href="http://kata.coderdojo.com/index.php?title=Dojo_Coordinates" target="_blank">Guide to getting co-ordinates here</a>; Leave blank for no map </p>
                         </div>
                     </div>
@@ -263,3 +267,66 @@ $supporter_image = array(
         </form>
     </div><!--.wrap-->
 </div><!--#content-->
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+var map, marker;
+var geocoder = new google.maps.Geocoder();
+var coords = new google.maps.LatLng(42.5, -36.2);
+
+function init() {
+  // Setup Map and Marker
+  map = new google.maps.Map(document.getElementById('mapCanvas'), {
+    zoom: 2,
+    center: coords,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+  marker = new google.maps.Marker({
+    position: coords,
+    title: 'My Dojo',
+    map: map,
+    draggable: true
+  });
+  
+  // Setup events
+  google.maps.event.addListener(marker, 'drag', function() {
+    updateCoordinateInput(marker.getPosition());
+  });
+  document.getElementById('guessAddress').onclick = function(){
+    var c = document.getElementById('country');
+    var country = c.options[c.selectedIndex].innerHTML;
+    codeAddress(document.getElementById('location').value+", "+country);
+  };
+  document.getElementById('getCoords').onclick = function() {
+    updateCoordinateInput(marker.getPosition());
+  };
+}
+
+function updateMap(ll) {
+  map.setCenter(ll);
+  marker.setPosition(ll);
+  map.setZoom(17);
+}
+
+function updateCoordinateInput(ll) {
+  document.getElementById('coordinates').value = [
+    ll.lat(),
+    ll.lng()
+  ].join(',');
+}
+
+function codeAddress(address) {
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      var ll = results[0].geometry.location;
+      updateMap(ll);
+      updateCoordinateInput(ll)
+	  } else {
+      alert("Geocode was not successful for the following reason: " + status);
+      return false;
+    }
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', init);
+</script>

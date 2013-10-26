@@ -12,6 +12,7 @@
                             <th>User</th>
                             <th>Edit</th>
                             <th><i>Verify</i></th>
+                            <th><i>Delete</i></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,16 +24,17 @@
                             <td><?=$dojo->dojoemail;?></td>
                             <td><a href="https://hwf.zendesk.com/tickets/new?email=<?=urlencode($dojo->useremail);?>&ticket[set_collaborators]=<?=urlencode($dojo->dojoemail);?>&ticket[subject]=Zen%20Verification:%20<?=urlencode($dojo->name);?>&ticket[status]=pending&ticket[type]=question&ticket[priority]=normal&ticket[group_id]=21222293" target="_blank" title="Open a Ticket"><?=$dojo->useremail;?></a></td>
                             <td><a href="/admin/edit/<?=$dojo->dojoid;?>" target="_blank">Edit</a></td>
-                            <td><select name="dojo_id[<?=$dojo->dojoid?>]" class="verif verif-<?=$dojo->verified?>">
+                            <td><select name="verify[<?=$dojo->dojoid?>]" class="verif verif-<?=$dojo->verified?>">
                                 <option value="0" <?=$dojo->verified==0?'selected':'';?>>Unverified</option>
                                 <option value="1" <?=$dojo->verified==1?'selected':'';?>>Verified</option>
                                 <option value="2" <?=$dojo->verified==2?'selected':'';?>>Previous</option>
                             </select></td>
+                            <td><input type="checkbox" name="delete[<?=$dojo->dojoid?>]" value="delete" <?=isset($dojo->deleted)&&$dojo->deleted?'checked':'';?>></td>
                         </tr>
                         <?php } ?>
                     </tbody>
                 </table>
-                <input type="submit" name="submit" value="Verify Checked Dojos" class="btn-primary" style="float:right;">
+                <input type="submit" name="submit" value="Done" class="btn-primary" style="float:right;">
             </form>
             <div style="clear:both;">&nbsp;</div>
     </div>

@@ -227,7 +227,7 @@ class Dojo extends CI_Controller
 	        if($this->dojo_model->user_owns_dojo($data['user_data']->user_id,$id)) {
     			$this->form_validation->set_rules('confirm', 'required');
     		    if ($this->form_validation->run()) { // validation ok
-                    $this->dojo_model->delete($id,$data['user_data']->user_id);
+                    $this->dojo_model->delete($id,1,$data['user_data']->user_id);
                     redirect('/dojo/my');
                 } else {
         			$this->load->view('template/header', $data);
@@ -262,6 +262,72 @@ class Dojo extends CI_Controller
 	    $this->form_validation->set_message('is_country', 'You must select a real country...');
 	    return array_key_exists($country,get_countries());
 	}
+	
+	public function json(){
+	    $this->load->driver('cache', array('adapter' => 'file'));
+	    
+	      if(!$display_map = $this->cache->get('map')) {
+	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL));
+            $map = array();
+            
+            $count = 0;
+
+            foreach($db_dojos as $dojo) {
+              $dojo = (array) $dojo;
+              $coord = explode(',',$dojo['coordinates']);
+              $map[$dojo['name']] = array(
+                "latitude" => (float) substr(trim($coord[0]),0,10),
+                "longitude" => (float) substr(trim($coord[1]),0,10),
+                "id" => (int) $dojo['id']
+              );
+            }
+            $display_map = $map;
+            $this->cache->save('map',$map,300);
+	      }
+	      header('Content-type: application/json');
+	      echo $this->input->get('callback')?$this->input->get('callback').'(':'';
+        echo json_encode($display_map);
+	      echo $this->input->get('callback')?')':'';
+	}
+	
+	public function geojson(){
+        $this->load->driver('cache', array('adapter' => 'file'));
+        
+        if(!$display_map = $this->cache->get('geojson_map')) {
+            $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL));
+            $map = array(
+          'type' => 'FeatureCollection',
+          'features' => array()
+        );
+
+        $count = 0;
+
+        foreach($db_dojos as $dojo) {
+          $dojo = (array) $dojo;
+          $coord = explode(',',$dojo['coordinates']);
+          $c = NULL;
+          $c[] = (float) $coord[1];
+          $c[] = (float) $coord[0];
+          $map['features'][] = array(
+            'type' => 'Feature',
+            'geometry' => array(
+              'type' => 'Point',
+              'coordinates' => $c
+            ),
+            'properties' => array(
+              'name' => $dojo['name']
+            )
+          );
+        }
+        $display_map = $map;
+        $this->cache->save('geojson_map',$map,300);
+        }
+          header('Content-type: application/json');
+          echo $this->input->get('callback')?$this->input->get('callback').'(':'';
+          echo json_encode($display_map);
+          echo $this->input->get('callback')?')':'';
+    }
+    
 }
 
 /* End of file dojo.php */

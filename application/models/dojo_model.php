@@ -15,6 +15,9 @@ class Dojo_Model extends CI_Model
 	 *
 	 */
 	function get($id = NULL, $verified = NULL, $unverified = NULL, $where = array() ){
+	    $default_where = array(
+	       'deleted' => 0
+	    );
 		if ($id) {
 			$this->db->where('id', $id);
 		}
@@ -27,8 +30,9 @@ class Dojo_Model extends CI_Model
 			$this->db->where('verified !=',1);
 		}
 		
-		foreach($where as $key => $val) {
-		    $this->db->where($key,$val);
+		$where_f = array_merge($default_where, $where);
+		foreach($where_f as $key => $val) {
+		    $this->db->where($key,$val,true);
 		}
 		
 		$this->db->where('deleted',0);
@@ -37,8 +41,12 @@ class Dojo_Model extends CI_Model
 		return $query->result();
 	}
 	
-	function get_with_user($id = NULL, $verified = NULL, $unverified = NULL){
-	    $this->db->select('users.email as useremail, dojos.id as dojoid, name, country, dojos.email as dojoemail, verified');
+	function get_with_user($id = NULL, $verified = NULL, $unverified = NULL, $where = array()){
+	    $default_where = array(
+	       'deleted' => 0
+	    );
+	    
+	    $this->db->select('users.email as useremail, dojos.id as dojoid, name, country, dojos.email as dojoemail, verified, deleted');
 		if ($id) {
 			$this->db->where('dojos.id', $id);
 		}
@@ -51,9 +59,12 @@ class Dojo_Model extends CI_Model
 			$this->db->where('dojos.verified !=',1);
 		}
 		
+		$where_f = array_merge($default_where, $where);
+		foreach($where_f as $key => $val) {
+		    $this->db->where($key,$val,true);
+		}
 		$this->db->join("users", "dojos.creator = users.id");
 		
-		$this->db->where('dojos.deleted',0);
 		$this->db->order_by('dojos.id desc');
 		$query = $this->db->get($this->dojo_table);
 		return $query->result();
@@ -198,9 +209,9 @@ class Dojo_Model extends CI_Model
         }
 	}
 	
-	function delete($dojo, $user)
+	function delete($dojo, $state, $user)
     {
-        $this->db->set('deleted', 1);
+        $this->db->set('deleted', $state);
         $this->db->set('deleted_at', "NOW()", false);
         $this->db->set('deleted_by', $user);
     
