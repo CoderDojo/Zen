@@ -16,6 +16,30 @@ a pull request back to us!
 - Twitter Bootstrap http://twitter.github.com/bootstrap/
 
 ### Local deployment notes 
-- Be sure to create a MySQL database wth the schema in `'/schema.sql'`, then fill in the details in  `'/application/config/database.php'`. Be sure also to enter an encryption key in `'/application/config/config.php'` on line 227, as Zen uses the session class.
-- You will also need reCaptcha keys from https://www.google.com/recaptcha/admin/create for the captcha used through the app, fill in the keys on lines 131 and 132 in `'/application/config/tank_auth.php'`.
-- Also note `.htaccess` is used to mask the `'index.php'` part of the URL, depending on your set up, you may need to edit this. 
+- Create a MySQL database:
+  - install mysql-server 
+  - create a database
+    - sudo mysqladmin create dojozen
+  - create a user (choose a password different than '1234')
+    - echo "grant all privileges on dojozen.* to 'dojozen'@'localhost' identified by '1234'" | sudo mysql dojozen
+  - create an empty database
+    - mysql dojozen --user=dojozen -p < schema.sql
+  - fill in the details in  `'/application/config/database.php'`. 
+- enter an encryption key in `'/application/config/config.php'` on line 227
+- configure reCaptcha
+  - get reCaptcha keys from https://www.google.com/recaptcha/admin/create for the captcha used through the app
+  - fill in the keys on lines 131 and 132 in `'/application/config/tank_auth.php'`.
+- Configure a webserver
+  - install apache (sometimes known as 'httpd')
+  - add a new configuration file at /etc/httpd/conf.d/zen.conf. If this apache instance is not going to serve any other sites you can safely set it like this, otherwise you need vhosts:
+
+```
+    <Directory /home/arnouten/dev/Zen>
+      AllowOverride All
+      Require all granted
+    </Directory>
+    #Alias /Zen /home/arnouten/dev/Zen
+    DocumentRoot /home/arnouten/dev/Zen
+```
+
+  - Note `.htaccess` is used to mask the `'index.php'` part of the URL, depending on your set up, you may need to edit this. 

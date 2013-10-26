@@ -21,7 +21,7 @@ class Dojo_Model extends CI_Model
 		if ($id) {
 			$this->db->where('id', $id);
 		}
-		
+
 		if ($verified){
 			$this->db->where('verified', 1);
 		}

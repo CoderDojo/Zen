@@ -7,6 +7,7 @@
                     foreach($dojos as $dojo) {
                         echo "&bull; <a href='/dojo/".$dojo->id."'>".$dojo->name."</a><br />";
                     }
+					echo "&bull; <a href='/dojo/".$dojo->id."'>".$dojo->name."</a><br />";
                 }
             ?>
         </div>
