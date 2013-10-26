@@ -1,21 +1,15 @@
-# Turn on URL rewriting
-RewriteEngine On
-
-# Installation directory
-RewriteBase /
-
-# Protect hidden files from being viewed
-<Files .*>
-	Order Deny,Allow
-	Deny From All
-</Files>
-
-# Protect application and system files from being viewed
-RewriteRule ^(?:application|modules|system)\b.* index.php/$0 [L]
-
-# Allow any files or directories that exist to be displayed directly
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-# Rewrite all other URLs to index.php/URL
-RewriteRule .* index.php/$0 [PT]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
+ 
+<IfModule !mod_rewrite.c>
+  # If we don't have mod_rewrite installed, all 404's
+  # can be sent to index.php, and everything works as normal.
+  # Submitted by: ElliotHaughin
+ 
+  ErrorDocument 404 /index.php
+</IfModule>
