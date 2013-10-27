@@ -1,6 +1,6 @@
     <div id="footer">
 		<div class="wrap">
-			<p class="fl">Copyleft/Copyright CoderDojo 2012</p>
+			<p class="fl">Copyleft/Copyright CoderDojo 2012-2013</p>
 			<ul class="fr">
                			<li><a href="http://www.engineyard.com/products/orchestra">PHP Hosting</a> sponsored by Engine Yard</li>
 			</ul>
