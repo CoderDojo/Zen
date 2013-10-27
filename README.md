@@ -24,22 +24,19 @@ a pull request back to us!
     - echo "grant all privileges on dojozen.* to 'dojozen'@'localhost' identified by '1234'" | sudo mysql dojozen
   - create an empty database
     - mysql dojozen --user=dojozen -p < schema.sql
-  - fill in the details in  `'/application/config/database.php'`. 
-- enter an encryption key in `'/application/config/config.php'` on line 227
-- configure reCaptcha
-  - get reCaptcha keys from https://www.google.com/recaptcha/admin/create for the captcha used through the app
-  - fill in the keys on lines 131 and 132 in `'/application/config/tank_auth.php'`.
+  - fill in the details in  `'/application/config/development/database.php'`. 
+- enter an encryption key in `'/application/config/development/config.php'` on line 227
 - Configure a webserver
   - install apache (sometimes known as 'httpd')
   - add a new configuration file at /etc/httpd/conf.d/zen.conf. If this apache instance is not going to serve any other sites you can safely set it like this, otherwise you need vhosts:
 
 ```
-    <Directory /home/arnouten/dev/Zen>
+    <Directory /home/arnouten/dev/Zen/web>
       AllowOverride All
       Require all granted
     </Directory>
     #Alias /Zen /home/arnouten/dev/Zen
-    DocumentRoot /home/arnouten/dev/Zen
+    DocumentRoot /home/arnouten/dev/Zen/web
 ```
 
   - Note `.htaccess` is used to mask the `'index.php'` part of the URL, depending on your set up, you may need to edit this. 
