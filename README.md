@@ -31,15 +31,18 @@ a pull request back to us!
   - fill in the keys on lines 131 and 132 in `'/application/config/tank_auth.php'`.
 - Configure a webserver
   - install apache (sometimes known as 'httpd')
-  - add a new configuration file at /etc/httpd/conf.d/zen.conf. If this apache instance is not going to serve any other sites you can safely set it like this, otherwise you need vhosts:
+  - add a new configuration file at /etc/httpd/sites-available/zen.conf . We'll have it listen on port :81
 
 ```
+  Listen 81
+  <VirtualHost *:81>
     <Directory /home/arnouten/dev/Zen>
       AllowOverride All
       Require all granted
     </Directory>
-    #Alias /Zen /home/arnouten/dev/Zen
     DocumentRoot /home/arnouten/dev/Zen
+  <VirtualHost>
 ```
 
+  - ln -s /etc/httpd/sites-available/zen.conf /etc/httpd/sites-enabled/zen.conf
   - Note `.htaccess` is used to mask the `'index.php'` part of the URL, depending on your set up, you may need to edit this. 
