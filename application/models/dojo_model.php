@@ -108,7 +108,7 @@ class Dojo_Model extends CI_Model
 
 			$query = $this->db->insert($this->dojo_table, $data);
 			$insert_id = $this->db->insert_id();
-			$this->update_user_dojo($insert_id, $user_id, true /* is owner*/);
+			$this->add_user_dojo($insert_id, $user_id, true /* is owner*/);
 			return $insert_id;
 		}
 		return NULL;
@@ -176,7 +176,7 @@ class Dojo_Model extends CI_Model
 	 * @param	string
 	 * @return	bool
 	 */
-	function update_user_dojo($dojo_id, $user_id, $owner = false)
+	function add_user_dojo($dojo_id, $user_id, $owner = false)
 	{
 		$this->db->set(array('user_id'=>$user_id,'dojo_id'=>$dojo_id,'owner'=>$owner));
 		$this->db->insert($this->user_dojo_table);
