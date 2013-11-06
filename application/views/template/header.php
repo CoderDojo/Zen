@@ -13,7 +13,7 @@
     <div id="top-bar">
 		<div class="wrap">
 		    <ul id="menu-top-menu">
-                <li><a href="/"><img src="static/img/cd_logo.png" height="30" style="margin-top: -3px;"></a></li>
+                <li><a href="/"><img src="/static/img/cd_logo.png" height="30" style="margin-top: -3px;"></a></li>
                 <li><a href="/dojo">Dojo List</a></li>
 		<?php if (isset($username)) { ?>
                 <li><a href="/dojo/my">My Dojos</a></li>
