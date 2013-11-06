@@ -129,7 +129,7 @@ $supporter_image = array(
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="email" name="email" value="<?=$email['value'];?>">
                             <div class="error-text"> <?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></div>
-                            <p class="help-block">This should be different to the personal email you signed up for an account here with. For your own CoderDojo email address (Eg. <i>limerick@coderdojo.com</i>), please <a href="mailto:enquiries@coderdojo.com">contact us</a>.</p>
+                            <p class="help-block">This should be different to the personal email you signed up for an account here with. For your own CoderDojo email address (Eg. <i>limerick@coderdojo.com</i>), please <a href="mailto:enquiries@coderdojo.com">contact us</a> and leave this field blank.</p>
                         </div>
                     </div>
                     <div class="control-group">
