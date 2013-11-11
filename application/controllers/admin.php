@@ -61,8 +61,27 @@ class Admin extends CI_Controller
 			$this->load->view('template/header', $data);
 
 			if ($data['user_data']->role == 0){
-			    $data['verified_dojos'] = $this->dojo_model->get(null, true);
-			    $data['all_dojos'] = $this->dojo_model->get();
+			    $verified_dojos = $this->dojo_model->get(null, true);
+			    $all_dojos = $this->dojo_model->get();
+			    $numbers = array();
+			    $totals = array();
+			    foreach(
+			        count_by_continent_country($verified_dojos) as
+			        $continent => $countries
+			    ) {
+			        foreach($countries as $country => $value) {
+			            $numbers[$continent][$country]['verified'] = $value;
+		            }
+		        }
+		        foreach(
+			        count_by_continent_country($all_dojos) as
+			        $continent => $countries
+			    ) {
+			        foreach($countries as $country => $value) {
+			            $numbers[$continent][$country]['total'] = $value;
+		            }
+		        }
+		        $data['stats'] = $numbers;
                 $this->load->view('admin/stats', $data);
 			}
 			$this->load->view('template/footer', $data);

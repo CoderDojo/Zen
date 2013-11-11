@@ -1,62 +1,51 @@
 <div id="content">
     <div class="mainpage">
-        <div class="col">
-            <legend>Verified Dojos</legend>
+            <legend>Dojos</legend>
             <table id="vfy-dojo-table" class="table">
-                <?php $total = 0; $num_countries = 0;
-                foreach(count_by_continent_country($verified_dojos) as $continent => $countries): ?>
-                    <tr>
-                        <th><?=$continent?></th>
-                        <th><?=array_sum($countries)?></th>
-                        <?php $total += array_sum($countries); ?>
-                        <?php $num_countries += count($countries); ?>
-                    </tr>
-                    <?php foreach($countries as $country => $dojos): ?>
+                <tr>
+                    <th></th>
+                    <th>Verified</th>
+                    <th>Total</th>
+                </tr>
+                <?php
+                $totals = array(
+                    'verified' => 0,
+                    'total' => 0
+                );
+                foreach($stats as $continent => $countries):
+                    $continent_totals = array(
+                        'verified' => 0,
+                        'total' => 0
+                    );
+                ?>
+                    <?php foreach ($countries as $country => $values): ?>
                         <tr>
                             <td><?=$country?></td>
-                            <td><?=$dojos?></td>
+                            <td><?=@$values['verified']?:0;?></td>
+                            <td><?=$values['total']?></td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php 
+                        $continent_totals['verified'] += @$values['verified']?:0;
+                        $continent_totals['total'] += $values['total'];
+                        $totals['verified'] += @$values['verified']?:0;
+                        $totals['total'] += $values['total'];
+                    endforeach;
+                    ?>
+                    <tr>
+                        <th><?=$continent?> Total</th>
+                        <th><?=$continent_totals['verified']?></th>
+                        <th><?=$continent_totals['total']?></th>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
                 <?php endforeach; ?>
                 <tr>
                     <th>Total</th>
-                    <th><?=$total?></th>
-                </tr>
-                <tr>
-                    <th>Total Countries</th>
-                    <th><?=$num_countries?></th>
+                    <th><?=$totals['verified']?></th>
+                    <th><?=$totals['total']?></th>
                 </tr>
             </table>
-        </div>
-        <div class="col">
-            <legend>All Dojos</legend>
-            <table id="all-dojo-table" class="table">
-                <?php $total = 0; $num_countries = 0;
-                foreach(count_by_continent_country($all_dojos) as $continent => $countries): ?>
-                    <tr>
-                        <th><?=$continent?></th>
-                        <th><?=array_sum($countries)?></th>
-                        <?php $total += array_sum($countries); ?>
-                        <?php $num_countries += count($countries); ?>
-                    </tr>
-                    <?php foreach($countries as $country => $dojos): ?>
-                        <tr>
-                            <td><?=$country?></td>
-                            <td><?=$dojos?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endforeach; ?>
-                <tr>
-                    <th>Total</th>
-                    <th><?=$total?></th>
-                </tr>
-                <tr>
-                    <th>Total Countries</th>
-                    <th><?=$num_countries?></th>
-                </tr>
-            </table>
-        </div>
-        <div style="clear:both;"></div>
     </div>
 </div>
 
