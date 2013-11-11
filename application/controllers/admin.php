@@ -32,7 +32,7 @@ class Admin extends CI_Controller
                 }
                 if(isset($_POST['delete'])) {
                     foreach($_POST['delete'] as $id => $state) {
-                        $this->dojo_model->delete($id, $state, $this->tank_auth->get_user_id());
+                        $this->dojo_model->delete($id, $state==="delete"?1:0, $this->tank_auth->get_user_id());
                     }
                     $this->load->view('template/alert', array('type' => 'success', 'title' => 'Deleted Dojos', 'message' => ''));
                 }
