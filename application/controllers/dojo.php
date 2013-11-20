@@ -112,11 +112,9 @@ class Dojo extends CI_Controller
 					$this->form_validation->set_value('supporter_image'),
 					$data['user_data']->user_id
 					))) {									// success
-					
 					    $this->load->library('email');
                         $this->email->from($data['user_data']->email);
                         $this->email->to('startadojo@coderdojo.com'); 
-
                         $this->email->subject('Zen Verification: '.$this->form_validation->set_value('dojo_name'));
                         $this->email->message(
                             'There has been a new listing created on Zen:'."\r\n\r\n".
@@ -129,6 +127,16 @@ class Dojo extends CI_Controller
                         );	
 
                         $this->email->send();
+
+						if($this->input->post('mailing_list') === "Yes") {
+							try {
+								require_once(APPPATH.'libraries/mailchimp/Mailchimp.php');
+								$cdlist = new Mailchimp_Lists(new Mailchimp($this->config->item('mailchimp_key')));
+								$cdlist->subscribe($this->config->item('mailchimp_list'), array('email'=>$data['user_data']->email));
+							} catch (Exception $e) {
+								redirect('/dojo/'.$dojo_id);
+							}
+						}
                         
 						redirect('/dojo/'.$dojo_id);
 

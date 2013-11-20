@@ -358,6 +358,8 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+$config['mailchimp_key'] = '';
+$config['mailchimp_list'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -213,7 +213,16 @@ $supporter_image = array(
                             <div class="error-text"><?php echo form_error($eb_id['name']); ?><?php echo isset($errors[$eb_id['name']])?$errors[$eb_id['name']]:''; ?></div><p class="help-block">If EventBrite, enter your event id (Eg. <i>3014403161</i>) to embed, <a href="http://kata.coderdojo.com/index.php?title=Eventbrite_event_id">how to find event id</a>, otherwise leave blank for no booking widget</p>
                         </div>
                     </div>
+                    <div class="control-group">
+                          <label class="control-label" for="mailing_list">Mailing list</label>
+                          <div class="controls">
+                            <div class="input-prepend">
+                              <input class="span2" id="mailing_list" name="mailing_list" type="checkbox" value="Yes">
+                            </div>
+                            <p class="help-block"> Receive monthly updates from the CoderDojo community around the world that keep you informed and help you with running your Dojo.</p>
 
+                          </div>
+                    </div>
                     <div class="control-group">
                         <div class="controls">
                             <input type="submit" class="btn-primary" value="Update Dojo Listing" style="padding: 5px 75px;">
