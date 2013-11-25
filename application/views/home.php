@@ -32,18 +32,22 @@ function initialize() {
   map = new google.maps.Map(document.getElementById("map-box"), mapOptions);
   for(var i in data) {
 	  markers[i] = new google.maps.Marker({
-	      position: new google.maps.LatLng(data[i].latitude,data[i].longitude),
-	      map: map,
-	      title: i,
+			dojoId: data[i],
+	    position: new google.maps.LatLng(data[i].latitude,data[i].longitude),
+	    map: map,
+	    title: i,
 		  clickable: true,
 		  icon: {
 			  path: google.maps.SymbolPath.CIRCLE,
 			  fillColor: 'ff3333',
 			  fillOpacity: 1,
-			  scale: 4,
+			  scale: 3,
 			  strokeOpacity: 1,
 			  strokeWeight: 1
 		  }
+	  });
+	  google.maps.event.addListener(markers[i], 'click', function() {
+			window.location = "http://zen.coderdojo.com/dojo/"+this.dojoId.id;
 	  });
   }
 }
@@ -70,12 +74,19 @@ function codeAddress(myLocation) {
   });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
-
-window.addEventListener('load',function() {
-	document.getElementById("location").addEventListener('change',function(){
-		myLocation = this.value;
-		codeAddress(myLocation);
-	})
+google.maps.event.addDomListener(window, 'load',function() {
+	el = document.getElementById("location");
+	if(el.addEventListener) {
+		el.addEventListener('change',function(){
+			myLocation = this.value;
+			codeAddress(myLocation);
+		});
+	} else if (el.attachEvent) {
+		el.attachEvent('onchange',function(){
+			myLocation = this.value;
+			codeAddress(myLocation);
+		});
+	}
 });
 </script>
 <script type="text/javascript" src="http://zen.coderdojo.com/dojo/json?callback=DojoList"></script>
