@@ -12,6 +12,10 @@
 	    <h2 id="closest-location"><a href="#">{{placeholder}}</a> which is 20KM away</h2>
 	</div>
 </div>
+<div id="found-yours-box" class="content-box hidden">
+	<h2 style="line-height:2em;">The Dojo you selected is</h2>
+	<h1><a href="/dojo/{{dojo.id}}" id="founddojoname">{{dojo.name}}</a></h1>
+</div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="/static/js/geolib.js"></script>
 <script type="text/javascript">
@@ -47,7 +51,12 @@ function initialize() {
 		  }
 	  });
 	  google.maps.event.addListener(markers[i], 'click', function() {
-			window.location = "http://zen.coderdojo.com/dojo/"+this.dojoId.id;
+			var findYours = document.getElementById('find-yours-box');
+			findYours.className = findYours.className + " hidden";
+			var foundYours = document.getElementById('found-yours-box');
+			foundYours.className = foundYours.className.replace("hidden", "");
+			document.getElementById('founddojoname').innerHTML = this.title;
+			document.getElementById('founddojoname').href = "/dojo/"+this.dojoId.id;
 	  });
   }
 }
@@ -64,7 +73,7 @@ function codeAddress(myLocation) {
 		  latitude: results[0].geometry.location.lat(),
 		  longitude: results[0].geometry.location.lng()
 	  },data);
-	  document.getElementById('closest-location').innerHTML = "<a href='http://zen.coderdojo.com/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> which is "+(closest.distance/1000).toFixed(1)+"KM away.";
+	  document.getElementById('closest-location').innerHTML = "<a href='/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> which is "+(closest.distance/1000).toFixed(1)+"KM away.";
 	  document.getElementById('closeness').style.display = "inherit";
     map.setCenter(new google.maps.LatLng(closest.latitude,closest.longitude));
 	  map.setZoom(15);

@@ -219,7 +219,7 @@ $supporter_image = array(
                             <div class="input-prepend">
                               <input class="span2" id="mailing_list" name="mailing_list" type="checkbox" value="Yes">
                             </div>
-                            <p class="help-block"> Receive monthly updates from the CoderDojo community around the world that keep you informed and help you with running your Dojo.</p>
+                            <p class="help-block"> Receive monthly updates to your user email address from the CoderDojo community around the world that keep you informed and help you with running your Dojo.</p>
 
                           </div>
                     </div>
