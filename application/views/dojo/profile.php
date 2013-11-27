@@ -100,7 +100,7 @@
                     </tr>
                     <?php } if($dojo_data[0]->website){?>
                     <tr>
-                        <td><b>Wesbite</b></td>
+                        <td><b>Website</b></td>
                         <td><a href="<?=$dojo_data[0]->website; ?>"><?=$dojo_data[0]->website; ?></a></td>
                     </tr>
                     <?php } if($dojo_data[0]->google_group){?>
