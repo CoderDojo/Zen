@@ -18,6 +18,7 @@
 		<?php if (isset($username)) { ?>
                 <li><a href="/dojo/my">My Dojos</a></li>
                 <li><a href="/dojo/create">Create a Dojo</a></li>
+                <li><a href="/charter">Charter</a></li>
                 <?php if($user_data->role == 0): ?>
                 <li><a href="#">&bull; Admin:</a></li>
                 <li><a href="/admin/dojos">Dojos</a></li>

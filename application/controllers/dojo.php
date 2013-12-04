@@ -8,7 +8,7 @@ class Dojo extends CI_Controller
 
 		$this->load->helper(array('form', 'url'));
 		$this->load->library(array('form_validation','tank_auth'));
-		$this->load->model('dojo_model');
+		$this->load->model(array('dojo_model','charter_model'));
 	}
 
 	function index()
@@ -67,6 +67,8 @@ class Dojo extends CI_Controller
 
 	function create()
 	{
+	    if(!Charter_Model::userHasSigned($this->tank_auth->get_user_data()->id)) redirect('/charter/sign');
+	    
 		if(!$this->tank_auth->is_logged_in()){
 			redirect("auth/login");
 		} else {
@@ -156,6 +158,8 @@ class Dojo extends CI_Controller
 
 	function edit($id)
 	{
+      if(!Charter_Model::userHasSigned($this->tank_auth->get_user_data()->id)) redirect('/charter/sign');
+
 	  if(!isset($id)) echo "<script type='text/javascript'>window.location = \"/dojo/my\";</script>";
 		if(!$this->tank_auth->is_logged_in()){
 			redirect("auth/login");
