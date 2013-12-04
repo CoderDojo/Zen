@@ -1,6 +1,7 @@
 <div id="content">
     <div class="mainpage">
         <legend>Hello World Foundation charter for CoderDojo</legend>
+        <p>All Dojos are required to agree with the below CoderDojo Charter. This Charter encompasses the basic ethos and core aspects of the CoderDojo movement, which all Dojos are founded on. The introduction of the Charter was announced by co-founder James Whelton to the CoderDojo Organisers Group on the 3rd of December 2013.</p>
         <div id="chartertext" class="form-horizontal">
             <?php $this->load->view('charter/charter_text.'.$signed->agreement_version.'.php'); ?>
             <div class="control-group">
