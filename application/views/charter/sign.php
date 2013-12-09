@@ -9,7 +9,8 @@
                 <label class="control-label" for="name">Your Full Name</label>
                 <div class="controls">
                     <input type="text" class="input-xlarge" id="name" name="name" value="<?php echo set_value("name"); ?>">
-                    <div class="error-text"><?php echo validation_errors('name'); ?></div>
+                    <div class="help-text">This should be your full name, not that of the Dojo.</div>
+                    <div class="error-text"><?php echo validation_errors(); ?></div>
                 </div>
             </div>
             <div class="control-group">

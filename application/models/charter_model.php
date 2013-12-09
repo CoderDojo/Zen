@@ -2,7 +2,7 @@
 
 class Charter_Model extends CI_Model
 {
-    const AGREEMENT_VERSION = 1;
+    const AGREEMENT_VERSION = 2;
     
     public $user_id;
     public $full_name;

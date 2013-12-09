@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>CoderDojo Zen</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="/static/css/styles.css">
         <link rel="stylesheet" href="/static/css/bootstrap.css">
         <script src="/static/js/jquery.min.js"></script>

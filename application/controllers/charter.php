@@ -5,13 +5,12 @@ class Charter extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-
 		$this->load->helper(array('url','form'));
 		$this->load->library(array('tank_auth','form_validation'));
-		$this->load->model(array('charter_model'));
 		if(!$this->tank_auth->is_logged_in()) {
 		    redirect('/auth/login');
 		}
+		$this->load->model(array('charter_model'));
 	}
 	
 	function index() {
