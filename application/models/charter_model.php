@@ -3,6 +3,7 @@
 class Charter_Model extends CI_Model
 {
     const AGREEMENT_VERSION = 2;
+    const AGREEMENT_VERSION_DATE = "6th December 2013";
     
     public $user_id;
     public $full_name;
@@ -14,7 +15,9 @@ class Charter_Model extends CI_Model
         if(!is_null($user_id)) {
             $this->get($user_id,$agreement_version);
         }
-        if(!isset($this->user_id)) $this->user_id = $this->tank_auth->get_user_data()->id;
+        if($this->tank_auth->is_logged_in()) {
+            if(!isset($this->user_id)) $this->user_id = $this->tank_auth->get_user_data()->id;
+        }
         if(!isset($this->ip_address)) $this->ip_address = $this->input->ip_address();
         if(!isset($this->agreement_version)) $this->agreement_version = self::AGREEMENT_VERSION;
     }

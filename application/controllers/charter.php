@@ -7,13 +7,16 @@ class Charter extends CI_Controller
 		parent::__construct();
 		$this->load->helper(array('url','form'));
 		$this->load->library(array('tank_auth','form_validation'));
-		if(!$this->tank_auth->is_logged_in()) {
-		    redirect('/auth/login');
-		}
 		$this->load->model(array('charter_model'));
 	}
 	
 	function index() {
+	    if(!$this->tank_auth->is_logged_in()) {
+	        $this->load->view('template/header');	        
+	        $this->load->view('charter/textonly');
+	        $this->load->view('template/footer');
+	        return 0;
+        }
 	    $data['username'] = $this->tank_auth->get_username();
 		$data['user_data'] =  $this->tank_auth->get_user_data();
 		
@@ -26,9 +29,13 @@ class Charter extends CI_Controller
             redirect('/charter/sign');
         }
     }
-	
+    	
 	function sign()
 	{
+	    $this->load->library(array('tank_auth'));
+	    if(!$this->tank_auth->is_logged_in()) {
+		    redirect('/auth/login');
+		}
 	    $data['username'] = $this->tank_auth->get_username();
 		$data['user_data'] =  $this->tank_auth->get_user_data();
 		
