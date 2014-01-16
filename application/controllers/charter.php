@@ -20,8 +20,8 @@ class Charter extends CI_Controller
 	    $data['username'] = $this->tank_auth->get_username();
 		$data['user_data'] =  $this->tank_auth->get_user_data();
 		
-	    if(Charter_Model::userHasSigned($this->tank_auth->get_user_data()->id)) {
-	        $data['signed'] = new Charter_Model($this->tank_auth->get_user_data()->id);
+	    if(Charter_Model::userHasSigned($this->tank_auth->get_user_data()->user_id)) {
+	        $data['signed'] = new Charter_Model($this->tank_auth->get_user_data()->user_id);
 	        $this->load->view('template/header', $data);	        
 	        $this->load->view('charter/signed', $data);
 	        $this->load->view('template/footer', $data);	        
@@ -39,7 +39,7 @@ class Charter extends CI_Controller
 	    $data['username'] = $this->tank_auth->get_username();
 		$data['user_data'] =  $this->tank_auth->get_user_data();
 		
-	    if(Charter_Model::userHasSigned($this->tank_auth->get_user_data()->id)) {
+	    if(Charter_Model::userHasSigned($this->tank_auth->get_user_data()->user_id)) {
 	        redirect('/charter');
 	    } else {
 	        $this->load->view('template/header', $data);

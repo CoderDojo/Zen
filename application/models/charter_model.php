@@ -16,7 +16,7 @@ class Charter_Model extends CI_Model
             $this->get($user_id,$agreement_version);
         }
         if($this->tank_auth->is_logged_in()) {
-            if(!isset($this->user_id)) $this->user_id = $this->tank_auth->get_user_data()->id;
+            if(!isset($this->user_id)) $this->user_id = $this->tank_auth->get_user_data()->user_id;
         }
         if(!isset($this->ip_address)) $this->ip_address = $this->input->ip_address();
         if(!isset($this->agreement_version)) $this->agreement_version = self::AGREEMENT_VERSION;
