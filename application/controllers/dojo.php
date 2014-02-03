@@ -286,7 +286,7 @@ class Dojo extends CI_Controller
 	    $this->load->driver('cache', array('adapter' => 'file'));
 	    
 	      if(!$display_map = $this->cache->get('map')) {
-	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'private' => 0));
+	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL));
             $map = array();
             
             $count = 0;
@@ -314,7 +314,7 @@ class Dojo extends CI_Controller
         $this->load->driver('cache', array('adapter' => 'file'));
         
         if(!$display_map = $this->cache->get('geojson_map')) {
-	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'private' => 0));
+	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL));
             $map = array(
           'type' => 'FeatureCollection',
           'features' => array()

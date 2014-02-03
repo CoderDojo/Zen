@@ -99,11 +99,21 @@ function codeAddress(myLocation) {
     	            num++;
 	            }
             }
-            console.log(num);
-            if(num > 1) {
+            if(num == 0) {
+                var closest = geolib.findNearest({
+    		        latitude: results[0].geometry.location.lat(),
+    		        longitude: results[0].geometry.location.lng()
+    	        },data);
+    	        map.setCenter(new google.maps.LatLng(closest.latitude,closest.longitude));
+            	  map.setZoom(15);
+    	        var close = "<h1>Your closest dojo is:</h1>";
+    	        close += "<h2><a href='/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> which is "+(closest.distance/1000).toFixed(1)+"KM away.</h2>";
+                document.getElementById('closeness').innerHTML = close;
+    	        document.getElementById('closeness').style.display = "inherit";
+            } else if(num > 1) {
 	            var close = "<h1>Your closest dojos are:</h1><br/><ul style='list-style:none'>";
                 for(var dojo in dojos) {
-                    close += "<li><a href='/dojo/"+dojos[dojo].id+"'>" + dojo + "</a></li>";
+                    close += "<li><a href='/dojo/"+dojos[dojo].id+"'>" + dojo + "</a>"+(dojos[dojo].private?"<b>(PRIVATE)</b>":"")+"</li>";
                 }
                 close += "</ul>";
             } else {
@@ -111,7 +121,7 @@ function codeAddress(myLocation) {
                 for(var dojo in dojos) {
                     map.setCenter(new google.maps.LatLng(dojos[dojo].latitude,dojos[dojo].longitude));
                 	  map.setZoom(15);
-                    close += "<h2><a href='/dojo/"+dojos[dojo].id+"'>" + dojo + "</a></h2>";
+                    close += "<h2><a href='/dojo/"+dojos[dojo].id+"'>" + dojo + "</a> "+(dojos[dojo].private?"<b>(PRIVATE)</b>":"")+"</h2>";
                 }
             }
             document.getElementById('closeness').innerHTML = close;
@@ -124,7 +134,7 @@ function codeAddress(myLocation) {
 	        map.setCenter(new google.maps.LatLng(closest.latitude,closest.longitude));
         	  map.setZoom(15);
 	        var close = "<h1>Your closest dojo is:</h1>";
-	        close += "<h2><a href='/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> which is "+(closest.distance/1000).toFixed(1)+"KM away.</h2>";
+	        close += "<h2><a href='/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> "+(dojos[dojo].private?"<b>(PRIVATE)</b>":"")+" which is "+(closest.distance/1000).toFixed(1)+"KM away.</h2>";
             document.getElementById('closeness').innerHTML = close;
 	        document.getElementById('closeness').style.display = "inherit";
 	    }
