@@ -279,7 +279,7 @@ $supporter_image = array(
                             <label class="checkbox inline" style="margin-top: -5px; margin-left: -28px;">
                                 <?=form_checkbox($private);?>
                             </label>
-                            <p class="help-block">If your Dojo is private you will not appear on the map or be searchable but your listing will appear on the <a href="/dojo">Dojo list</a>.</p>
+                            <p class="help-block">If your Dojo is private you will not appear on the map or be searchable but your listing will appear on the <a href="/dojo">Dojo list</a>. This is because currently the map can only return one result and this could cause issues for people searching for Dojos.</p>
                         </div>
                     </div>
                 </div>
