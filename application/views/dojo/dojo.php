@@ -2,7 +2,9 @@
     <div class="wrap">
         <div id="main">
             <?php
-                foreach(group_by_country($dojo_data) as $country => $dojos){
+                $dojos_by_country = group_by_country($dojo_data);
+                ksort($dojos_by_country);
+                foreach($dojos_by_country as $country => $dojos){
                     echo "<br /><legend style='margin-bottom:5px;'>".$country."</legend>";
                     foreach($dojos as $dojo) {
                         echo "&bull; <a href='/dojo/".$dojo->id."'>".$dojo->name."</a> ".($dojo->private?"(<b style='color:#ff0000'>PRIVATE</b>)":"")."<br />";
