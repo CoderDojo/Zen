@@ -100,6 +100,7 @@ $stage = array(
 $private = array(
     'name'        => 'private',
     'id'          => 'private',
+    'value'       => 1,
     'checked'     => set_checkbox('private', 1, $dojo_data[0]->private?TRUE:FALSE),
     'style'       => 'margin:10px',
     );

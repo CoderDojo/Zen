@@ -128,9 +128,9 @@ class Admin extends CI_Controller
 		    $this->load->library(array('form_validation'));
 			$data['user_id']	= $this->tank_auth->get_user_id();
 			$data['username']	= $this->tank_auth->get_username();
-      $data['user_data'] =  $this->tank_auth->get_user_data();
-      $data['id'] = $id;
-      $data['is_admin'] = true;
+            $data['user_data'] =  $this->tank_auth->get_user_data();
+            $data['id'] = $id;
+            $data['is_admin'] = true;
             
 			if ($data['user_data']->role == 0){
 			    //check if the has a Dojo
@@ -151,6 +151,7 @@ class Admin extends CI_Controller
 				$this->form_validation->set_rules('need_mentors', 'Need Mentors', 'trim|xss_clean');
 				$this->form_validation->set_rules('stage', 'Stage', 'trim|xss_clean|is_natural');
 				$this->form_validation->set_rules('supporter_image', 'Supporter Image', 'trim|xss_clean|prep_url|htmlspecialchars');
+				$this->form_validation->set_rules('private', 'Private', 'trim|xss_clean');
 
 				$data['errors'] = array();
 				$data['dojo_data'] = $this->dojo_model->get($id);
@@ -172,7 +173,8 @@ class Admin extends CI_Controller
 					$this->form_validation->set_value('eb_id'),
 					$this->form_validation->set_value('need_mentors'),
 					$this->form_validation->set_value('stage'),
-					$this->form_validation->set_value('supporter_image')
+					$this->form_validation->set_value('supporter_image'),
+    				$this->form_validation->set_value('private')
 					))) {									// success
 
 						redirect('/dojo/'.$dojo_id);
