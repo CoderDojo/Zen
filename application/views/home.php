@@ -89,17 +89,46 @@ function codeAddress(myLocation) {
   var address = myLocation;
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-	  var closest = geolib.findNearest({
-		  latitude: results[0].geometry.location.lat(),
-		  longitude: results[0].geometry.location.lng()
-	  },data);
-	  document.getElementById('closest-location').innerHTML = "<a href='/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> which is "+(closest.distance/1000).toFixed(1)+"KM away.";
-	  document.getElementById('closeness').style.display = "inherit";
-    map.setCenter(new google.maps.LatLng(closest.latitude,closest.longitude));
-	  map.setZoom(15);
-	} else {
-      alert("Geocode was not successful for the following reason: " + status);
-    }
+        if(results[0].geometry.bounds) {
+            map.fitBounds(results[0].geometry.bounds);
+            var dojos = new Array();
+            var num = 0;
+            for(var i in data) {
+                if(results[0].geometry.bounds.contains(new google.maps.LatLng(data[i].latitude, data[i].longitude))) {
+    	            dojos[i] = data[i];
+    	            num++;
+	            }
+            }
+            console.log(num);
+            if(num > 1) {
+	            var close = "<h1>Your closest dojos are:</h1><br/><ul style='list-style:none'>";
+                for(var dojo in dojos) {
+                    close += "<li><a href='/dojo/"+dojos[dojo].id+"'>" + dojo + "</a></li>";
+                }
+                close += "</ul>";
+            } else {
+	            var close = "<h1>Your closest dojo is:</h1>";
+                for(var dojo in dojos) {
+                    map.setCenter(new google.maps.LatLng(dojos[dojo].latitude,dojos[dojo].longitude));
+                	  map.setZoom(15);
+                    close += "<h2><a href='/dojo/"+dojos[dojo].id+"'>" + dojo + "</a></h2>";
+                }
+            }
+            document.getElementById('closeness').innerHTML = close;
+            document.getElementById('closeness').style.display = "inherit";
+	    } else {
+	        var closest = geolib.findNearest({
+		        latitude: results[0].geometry.location.lat(),
+		        longitude: results[0].geometry.location.lng()
+	        },data);
+	        map.setCenter(new google.maps.LatLng(closest.latitude,closest.longitude));
+        	  map.setZoom(15);
+	        var close = "<h1>Your closest dojo is:</h1>";
+	        close += "<h2><a href='/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> which is "+(closest.distance/1000).toFixed(1)+"KM away.</h2>";
+            document.getElementById('closeness').innerHTML = close;
+	        document.getElementById('closeness').style.display = "inherit";
+	    }
+	}
   });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
