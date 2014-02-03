@@ -93,7 +93,9 @@ class Dojo extends CI_Controller
 				$this->form_validation->set_rules('notes', 'Notes', 'trim|xss_clean');
 				$this->form_validation->set_rules('need_mentors', 'Need Mentors', 'trim|xss_clean');
 				$this->form_validation->set_rules('stage', 'Stage', 'trim|xss_clean|is_natural');
+				$this->form_validation->set_rules('private', 'Private', 'trim|xss_clean');
 				$this->form_validation->set_rules('supporter_image', 'Supporter Image', 'trim|xss_clean|prep_url|htmlspecialchars');
+				
 
 				$data['errors'] = array();
 
@@ -113,7 +115,8 @@ class Dojo extends CI_Controller
 					$this->form_validation->set_value('need_mentors'),
 					$this->form_validation->set_value('stage'),
 					$this->form_validation->set_value('supporter_image'),
-					$data['user_data']->user_id
+					$data['user_data']->user_id,
+					$this->form_validation->set_value('private')
 					))) {									// success
 					    $this->load->library('email');
                         $this->email->from($data['user_data']->email);
@@ -189,6 +192,7 @@ class Dojo extends CI_Controller
 				$this->form_validation->set_rules('need_mentors', 'Need Mentors', 'trim|xss_clean');
 				$this->form_validation->set_rules('stage', 'Stage', 'trim|xss_clean|is_natural');
 				$this->form_validation->set_rules('supporter_image', 'Supporter Image', 'trim|xss_clean|prep_url|htmlspecialchars');
+				$this->form_validation->set_rules('private', 'Private', 'trim|xss_clean');
 
 				$data['errors'] = array();
 				$data['dojo_data'] = $this->dojo_model->get($id);
@@ -210,7 +214,8 @@ class Dojo extends CI_Controller
 					$this->form_validation->set_value('eb_id'),
 					$this->form_validation->set_value('need_mentors'),
 					$this->form_validation->set_value('stage'),
-					$this->form_validation->set_value('supporter_image')
+					$this->form_validation->set_value('supporter_image'),
+    				$this->form_validation->set_value('private')
 					))) {									// success
 
 						redirect('/dojo/'.$dojo_id);
@@ -281,7 +286,7 @@ class Dojo extends CI_Controller
 	    $this->load->driver('cache', array('adapter' => 'file'));
 	    
 	      if(!$display_map = $this->cache->get('map')) {
-	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL));
+	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'private' => 0));
             $map = array();
             
             $count = 0;
@@ -300,7 +305,7 @@ class Dojo extends CI_Controller
 	      }
 	      header('Content-type: application/json');
 	      echo $this->input->get('callback')?$this->input->get('callback').'(':'';
-        echo json_encode($display_map);
+          echo json_encode($display_map);
 	      echo $this->input->get('callback')?')':'';
 	}
 	
@@ -308,7 +313,7 @@ class Dojo extends CI_Controller
         $this->load->driver('cache', array('adapter' => 'file'));
         
         if(!$display_map = $this->cache->get('geojson_map')) {
-            $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL));
+	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'private' => 0));
             $map = array(
           'type' => 'FeatureCollection',
           'features' => array()

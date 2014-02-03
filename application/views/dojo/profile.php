@@ -5,6 +5,9 @@
 			<?php if($dojo_data[0]->stage == 4){ ?>
             <div class="alert alert-error"><b>Dojo inactive</b>: This means we have contacted the Dojo and they have told us they are no longer running, or they did not respond.</div>
             <?php } ?>
+			<?php if($dojo_data[0]->private){ ?>
+            <div class="alert alert-error"><b>Private Dojo</b>: This means this Dojo is only open to specific people (for example, students in a school). Please do not contact this Dojo.</div>
+            <?php } ?>
             <table class="table" style="margin-left: 30px;">
                 <?php if($dojo_data[0]->time){ ?>
                 <tr>

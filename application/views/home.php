@@ -98,7 +98,7 @@ google.maps.event.addDomListener(window, 'load',function() {
 	}
 });
 </script>
-<script type="text/javascript" src="http://zen.coderdojo.com/dojo/json?callback=DojoList"></script>
+<script type="text/javascript" src="/dojo/json?callback=DojoList"></script>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
 

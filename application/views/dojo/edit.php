@@ -96,6 +96,14 @@ $stage = array(
     'id'          => 'stage',
     'style' => 'margin-top: 4px;',
     );
+    
+$private = array(
+    'name'        => 'private',
+    'id'          => 'private',
+    'checked'     => set_checkbox('private', 1, $dojo_data[0]->private?TRUE:FALSE),
+    'style'       => 'margin:10px',
+    );
+
 
 $supporter_image = array(
 	'name'	=> 'supporter_image',
@@ -245,6 +253,15 @@ $supporter_image = array(
                             <?=form_radio($stage, 3, set_radio('stage', '3', ($dojo_data[0]->stage==3)?TRUE:''));?>
                             Full up
                           </label>
+                        </div>
+                    </div>
+                    <div class="control-group" style="margin-left: -40px;">
+                        <label class="control-label" for="private">Private</label>
+                        <div class="controls">
+                            <label class="checkbox inline" style="margin-top: -5px; margin-left: -28px;">
+                                <?=form_checkbox($private);?>
+                            </label>
+                            <p class="help-block">If your Dojo is private you will not appear on the map or be searchable but your listing will appear on the <a href="/dojo">Dojo list</a>. This is because currently the map can only return one result and this could cause issues for people searching for Dojos.</p>
                         </div>
                     </div>
                 </div>

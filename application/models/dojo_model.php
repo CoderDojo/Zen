@@ -84,7 +84,7 @@ class Dojo_Model extends CI_Model
 	 * Create a dojo listing
 	 *
 	 */
-	function create($name, $time, $country, $location, $coordinates, $email, $google_group, $website, $twitter, $notes, $eb_id, $need_mentors, $stage, $supporter_image, $user_id){
+	function create($name, $time, $country, $location, $coordinates, $email, $google_group, $website, $twitter, $notes, $eb_id, $need_mentors, $stage, $supporter_image, $user_id, $private){
 	    
 		if ((strlen($name) > 0) AND !$this->is_name_available($name)) {
 			$this->error = array('dojo_name' => 'Dojo Name is use, pick another');
@@ -105,6 +105,7 @@ class Dojo_Model extends CI_Model
 			'need_mentors' => (($need_mentors == FALSE)?FALSE:TRUE),
 			'stage' => $stage,
 			'supporter_image' => $supporter_image,
+			'private' => $private,
 			);
 
 			$query = $this->db->insert($this->dojo_table, $data);
@@ -119,7 +120,7 @@ class Dojo_Model extends CI_Model
 	 * Update existing dojo listing
 	 *
 	 */
-	function update($id, $name, $time, $country, $location, $coordinates, $email, $google_group, $website, $twitter, $notes, $eb_id, $need_mentors, $stage, $supporter_image){
+	function update($id, $name, $time, $country, $location, $coordinates, $email, $google_group, $website, $twitter, $notes, $eb_id, $need_mentors, $stage, $supporter_image, $private){
 
 		$dojo_data = $this->get($id);
 
@@ -144,6 +145,7 @@ class Dojo_Model extends CI_Model
 			'need_mentors' => (($need_mentors == FALSE)?FALSE:TRUE),
 			'stage' => $stage,
 			'supporter_image' => $supporter_image,
+			'private' => (int) $private
 			);
 			$this->db->set($data);
 

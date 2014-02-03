@@ -91,6 +91,15 @@ $need_mentors = array(
     'style'       => 'margin:10px',
     );
 
+$private = array(
+     'name'        => 'private',
+     'id'          => 'private',
+     'value'       => 1,
+     'checked'     => set_checkbox('private', 1, FALSE),
+     'style'       => 'margin:10px',
+  );
+
+
 $stage = array(
     'name'        => 'stage',
     'id'          => 'stage',
@@ -262,6 +271,15 @@ $supporter_image = array(
                             <?=form_radio($stage, 3, set_radio('stage', '3'));?>
                             Full up
                           </label>
+                        </div>
+                    </div>
+                    <div class="control-group" style="margin-left: -40px;">
+                        <label class="control-label" for="private">Private</label>
+                        <div class="controls">
+                            <label class="checkbox inline" style="margin-top: -5px; margin-left: -28px;">
+                                <?=form_checkbox($private);?>
+                            </label>
+                            <p class="help-block">If your Dojo is private you will not appear on the map or be searchable but your listing will appear on the <a href="/dojo">Dojo list</a>.</p>
                         </div>
                     </div>
                 </div>
