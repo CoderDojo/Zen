@@ -297,7 +297,8 @@ class Dojo extends CI_Controller
               $map[$dojo['name']] = array(
                 "latitude" => (float) substr(trim($coord[0]),0,10),
                 "longitude" => (float) substr(trim($coord[1]),0,10),
-                "id" => (int) $dojo['id']
+                "id" => (int) $dojo['id'],
+                "private" => (bool) $dojo['private']
               );
             }
             $display_map = $map;
@@ -334,7 +335,8 @@ class Dojo extends CI_Controller
               'coordinates' => $c
             ),
             'properties' => array(
-              'name' => $dojo['name']
+              'name' => $dojo['name'],
+              "private" => (bool) $dojo['private']
             )
           );
         }
