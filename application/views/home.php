@@ -18,11 +18,55 @@
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="/static/js/geolib.js"></script>
+<script type="text/javascript" src="/static/js/markercluster.js"></script>
 <script type="text/javascript">
 var map;
 var markers = [];
+var markerClusterer = null;
 var geocoder;
 var data;
+
+function refreshMap() {
+  if (markerClusterer) {
+    markerClusterer.clearMarkers();
+  }
+
+  var markers = [];
+
+  for (var i in data) {
+    var latLng = new google.maps.LatLng(data[i].latitude,
+        data[i].longitude)
+    var marker =     new google.maps.Marker({
+    			dojoId: data[i],
+    	    position: new google.maps.LatLng(data[i].latitude,data[i].longitude),
+    	    map: map,
+    	    title: i,
+    		  clickable: true,
+    		  icon: {
+    			  path: google.maps.SymbolPath.CIRCLE,
+    			  fillColor: 'ff3333',
+    			  fillOpacity: 1,
+    			  scale: 3,
+    			  strokeOpacity: 1,
+    			  strokeWeight: 1
+    		  }
+    	  });
+    google.maps.event.addListener(marker, 'click', function() {
+		var findYours = document.getElementById('find-yours-box');
+		findYours.className = findYours.className + " hidden";
+		var foundYours = document.getElementById('found-yours-box');
+		foundYours.className = foundYours.className.replace("hidden", "");
+		document.getElementById('founddojoname').innerHTML = this.title;
+		document.getElementById('founddojoname').href = "/dojo/"+this.dojoId.id;
+    });
+    markers.push(marker);
+  }
+  
+  markerClusterer = new MarkerClusterer(map, markers, {
+    maxZoom: 10,
+    gridSize: 50,
+  });
+}
 
 function initialize() {
   geocoder = new google.maps.Geocoder();
@@ -34,31 +78,7 @@ function initialize() {
 	scrollwheel: false
   };
   map = new google.maps.Map(document.getElementById("map-box"), mapOptions);
-  for(var i in data) {
-	  markers[i] = new google.maps.Marker({
-			dojoId: data[i],
-	    position: new google.maps.LatLng(data[i].latitude,data[i].longitude),
-	    map: map,
-	    title: i,
-		  clickable: true,
-		  icon: {
-			  path: google.maps.SymbolPath.CIRCLE,
-			  fillColor: 'ff3333',
-			  fillOpacity: 1,
-			  scale: 3,
-			  strokeOpacity: 1,
-			  strokeWeight: 1
-		  }
-	  });
-	  google.maps.event.addListener(markers[i], 'click', function() {
-			var findYours = document.getElementById('find-yours-box');
-			findYours.className = findYours.className + " hidden";
-			var foundYours = document.getElementById('found-yours-box');
-			foundYours.className = foundYours.className.replace("hidden", "");
-			document.getElementById('founddojoname').innerHTML = this.title;
-			document.getElementById('founddojoname').href = "/dojo/"+this.dojoId.id;
-	  });
-  }
+  refreshMap()
 }
 
 function DojoList(dojos) {
