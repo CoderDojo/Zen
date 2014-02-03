@@ -1,6 +1,10 @@
 <html>
     <head>
-        <title>CoderDojo Zen</title>
+        <title><?php
+        
+        if(isset($dojo_data)) { echo $dojo_data[0]->name. ' - '; }
+        
+        ?>CoderDojo Zen</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="/static/css/styles.css">
         <link rel="stylesheet" href="/static/css/bootstrap.css">
