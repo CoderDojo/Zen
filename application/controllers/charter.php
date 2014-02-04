@@ -49,7 +49,9 @@ class Charter extends CI_Controller
 	            $nc = new Charter_Model;
 	            $nc->full_name = $this->form_validation->set_value('name');
 	            $nc->save();
-	            redirect('/charter');
+	            $redir = $this->session->userdata('c_redirect_from');
+	            $this->session->unset_userdata('c_redirect_from');
+	            redirect($redir);
 	        } else {
 	            
             }
