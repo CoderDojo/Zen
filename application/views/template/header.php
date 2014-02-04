@@ -2,7 +2,7 @@
     <head>
         <title><?php
         
-        if(isset($dojo_data)) { echo $dojo_data[0]->name. ' - '; }
+        if(isset($dojo_name)) { echo $dojo_name. ' - '; }
         
         ?>CoderDojo Zen</title>
         <meta charset="UTF-8">

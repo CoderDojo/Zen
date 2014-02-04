@@ -54,6 +54,7 @@ class Dojo extends CI_Controller
 		}
 		
 		$data['dojo_data'] = $this->dojo_model->get($this->uri->segment(2));
+		$data['dojo_name'] = $data['dojo_data'][0]->name;
 		if(!empty($data['dojo_data']) && $vfby = $this->users->get_user_by_id($data['dojo_data'][0]->verified_by,1)) {
 		    $data['verified_by'] = $vfby->email;
 		} else {
