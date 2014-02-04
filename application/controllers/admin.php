@@ -22,6 +22,7 @@ class Admin extends CI_Controller
             $data['pagename'] = 'Unverified';
 
 			$this->load->view('template/header', $data);
+    		$this->load->model(array('charter_model'));
 
 			if ($data['user_data']->role == 0){
                 if(isset($_POST['verify'])){

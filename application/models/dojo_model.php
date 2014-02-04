@@ -46,7 +46,7 @@ class Dojo_Model extends CI_Model
 	       'deleted' => 0
 	    );
 	    
-	    $this->db->select('users.email as useremail, dojos.id as dojoid, name, country, dojos.email as dojoemail, verified, deleted');
+	    $this->db->select('users.email as useremail, `charter_agreement`.`agreement_version` as charter, dojos.id as dojoid, name, country, dojos.email as dojoemail, verified, deleted');
 		if ($id) {
 			$this->db->where('dojos.id', $id);
 		}
@@ -64,6 +64,7 @@ class Dojo_Model extends CI_Model
 		    $this->db->where($key,$val,true);
 		}
 		$this->db->join("users", "dojos.creator = users.id");
+		$this->db->join("charter_agreement", "users.id = charter_agreement.user_id", 'left outer');
 		
 		$this->db->order_by('dojos.id desc');
 		$query = $this->db->get($this->dojo_table);
