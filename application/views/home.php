@@ -82,6 +82,7 @@ function DojoList(dojos) {
 }
 
 function codeAddress(myLocation) {
+  _gaq.push(['_trackEvent', 'Dojos', 'Search', myLocation]);
   var address = myLocation;
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
