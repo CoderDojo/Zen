@@ -1,5 +1,7 @@
 <div id="content">
     <div class="mainpage">
+            <legend>Charter</legend>
+            <p><?=$charter?> <?=$charter==1?'person has':'people have'?> signed the current version of the charter.</p>
             <legend>Dojos</legend>
             <table id="vfy-dojo-table" class="table">
                 <tr>

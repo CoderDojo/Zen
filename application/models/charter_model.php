@@ -54,6 +54,15 @@ class Charter_Model extends CI_Model
         }
     }
     
+    public static function count($agreement_version = self::AGREEMENT_VERSION) {
+        $ci =& get_instance();
+        if(!is_null($agreement_version)) $ci->db->where('agreement_version',$agreement_version);
+        $ci->db->select('COUNT(DISTINCT `user_id`) as count');
+        $query = $ci->db->get('charter_agreement');
+        $r = $query->result();
+        return $r[0]->count;
+    }
+    
     private function _exchange_array($array) {
         $this->user_id = $array['user_id']?:NULL;
         $this->full_name = $array['full_name']?:NULL;

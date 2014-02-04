@@ -83,6 +83,8 @@ class Admin extends CI_Controller
 		            }
 		        }
 		        $data['stats'] = $numbers;
+		        $this->load->model(array('charter_model'));
+		        $data['charter'] = Charter_Model::count();
                 $this->load->view('admin/stats', $data);
 			}
 			$this->load->view('template/footer', $data);
