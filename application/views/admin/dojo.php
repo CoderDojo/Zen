@@ -26,7 +26,7 @@
                             <td><a href="/admin/edit/<?=$dojo->dojoid;?>" target="_blank">Edit</a></td>
                             <td><select name="verify[<?=$dojo->dojoid?>]" class="verif verif-<?=$dojo->verified?>">
                                 <option value="0" <?=$dojo->verified==0?'selected':'';?>>Unverified</option>
-                                <option value="1" <?=$dojo->verified==1?'selected':'';?>>Verified</option>
+                                <option <?=$dojo->charter==Charter_Model::AGREEMENT_VERSION?'':'disabled';?> value="1" <?=$dojo->verified==1?'selected':'';?>>Verified</option>
                                 <option value="2" <?=$dojo->verified==2?'selected':'';?>>Previous</option>
                             </select></td>
                             <td><input type="checkbox" name="delete[<?=$dojo->dojoid?>]" value="delete" <?=isset($dojo->deleted)&&$dojo->deleted?'checked':'';?>></td>
