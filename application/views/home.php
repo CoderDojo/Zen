@@ -131,7 +131,7 @@ function codeAddress(myLocation) {
 	        map.setCenter(new google.maps.LatLng(closest.latitude,closest.longitude));
         	  map.setZoom(15);
 	        var close = "<h1 style='line-height:2em;'>Your closest dojo is:</h1>";
-	        close += "<h2 style='line-height:1.7em;'><a href='/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> "+(dojos[dojo].private?"<b>(PRIVATE)</b>":"")+" which is "+(closest.distance/1000).toFixed(1)+"KM away.</h2>";
+	        close += "<h2 style='line-height:1.7em;'><a href='/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> "+(data[closest.key].private?"<b>(PRIVATE)</b>":"")+" which is "+(closest.distance/1000).toFixed(1)+"KM away.</h2>";
             document.getElementById('closeness').innerHTML = close;
 	        document.getElementById('closeness').style.display = "inherit";
 	    }
