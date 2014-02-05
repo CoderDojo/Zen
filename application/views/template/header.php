@@ -6,6 +6,11 @@
         
         ?>CoderDojo Zen</title>
         <meta charset="UTF-8">
+        <?php 
+            if(isset($dojo_name) && isset($dojo_data) && !empty($dojo_data[0]) && ($dojo_data[0]->private == 1 || $dojo_data[0]->private != 1)) {
+                echo '<meta name="robots" content="noindex, nofollow">'."\n";
+            }   
+        ?>
         <link rel="stylesheet" href="/static/css/styles.css">
         <link rel="stylesheet" href="/static/css/bootstrap.css">
         <script src="/static/js/jquery.min.js"></script>
