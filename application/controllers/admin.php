@@ -8,7 +8,8 @@ class Admin extends CI_Controller
         $this->load->model('dojo_model');
 		$this->load->library('tank_auth');
 		$this->load->helper(array('form', 'url'));
-		
+		$this->load->model(array('charter_model'));
+        
 	}
 
 	function index()
@@ -83,7 +84,6 @@ class Admin extends CI_Controller
 		            }
 		        }
 		        $data['stats'] = $numbers;
-		        $this->load->model(array('charter_model'));
 		        $data['charter'] = Charter_Model::count();
                 $this->load->view('admin/stats', $data);
 			}
