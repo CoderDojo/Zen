@@ -207,7 +207,6 @@ class Dojo_Model extends CI_Model
             }
     
             $this->db->where('id', $dojo);
-            $this->db->where('id', $dojo);
 
             $this->db->where('deleted',0);
             $this->db->update($this->dojo_table);

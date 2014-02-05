@@ -34,11 +34,11 @@
 
             <?php if($dojo_data[0]->coordinates) {?>
             <legend>Map</legend>
-            <iframe width="550" height="250" style="margin-left: 37px; frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=<?=$dojo_data[0]->coordinates; ?>&amp;aq=&amp;sll=<?=$dojo_data[0]->coordinates; ?>&amp;sspn=0.002453,0.00618&amp;ie=UTF8&amp;t=h&amp;z=17&amp;ll=<?=$dojo_data[0]->coordinates; ?>&amp;output=embed"></iframe><br /><small><a style="margin-left: 483px;" href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=<?=$dojo_data[0]->coordinates; ?>&amp;aq=&amp;sll=<?=$dojo_data[0]->coordinates; ?>&amp;sspn=0.002453,0.00618&amp;ie=UTF8&amp;t=h&amp;z=17&amp;ll=<?=$dojo_data[0]->coordinates; ?>" style="color:#0000FF;text-align:left" >View Larger Map</a></small>
+            <iframe width="550" height="250" style="margin-left: 37px; frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="//maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=<?=$dojo_data[0]->coordinates; ?>&amp;aq=&amp;sll=<?=$dojo_data[0]->coordinates; ?>&amp;sspn=0.002453,0.00618&amp;ie=UTF8&amp;t=h&amp;z=17&amp;ll=<?=$dojo_data[0]->coordinates; ?>&amp;output=embed"></iframe><br /><small><a style="margin-left: 483px;" href="//maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=<?=$dojo_data[0]->coordinates; ?>&amp;aq=&amp;sll=<?=$dojo_data[0]->coordinates; ?>&amp;sspn=0.002453,0.00618&amp;ie=UTF8&amp;t=h&amp;z=17&amp;ll=<?=$dojo_data[0]->coordinates; ?>" style="color:#0000FF;text-align:left" >View Larger Map</a></small>
             <?php } if($dojo_data[0]->eb_id) { ?>
             <legend>Booking</legend>
             <div style="width:550px; text-align:left; margin-left: 37px;">
-                <iframe  src="http://www.eventbrite.com/tickets-external?eid=<?=$dojo_data[0]->eb_id; ?>&ref=etckt" frameborder="0" height="224" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
+                <iframe  src="//www.eventbrite.com/tickets-external?eid=<?=$dojo_data[0]->eb_id; ?>&ref=etckt" frameborder="0" height="224" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
             </div>
             <?php } if($dojo_data[0]->supporter_image) { ?>
             <legend>Dojo Supported By</legend>

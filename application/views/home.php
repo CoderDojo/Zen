@@ -156,7 +156,7 @@ google.maps.event.addDomListener(window, 'load',function() {
 </script>
 <script type="text/javascript" src="/dojo/json?callback=DojoList"></script>
 <style type="text/css">
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
 
 *{margin:0; padding:0; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 

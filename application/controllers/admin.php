@@ -104,13 +104,19 @@ class Admin extends CI_Controller
 			$this->load->view('template/header', $data);
 
 			if ($data['user_data']->role == 0){
-                if(isset($_POST['dojo_id'])){
-                    foreach($_POST['dojo_id'] as $id => $state) {
+                if(isset($_POST['verify'])){
+                    foreach($_POST['verify'] as $id => $state) {
                         $this->dojo_model->verify($id, $state, $this->tank_auth->get_user_id());
                     }
                     $this->load->view('template/alert', array('type' => 'success', 'title' => 'Verified Checked Dojos', 'message' => 'Awww yeah...'));
                 }
-                $data['dojos'] = $this->dojo_model->get_with_user(null, true, null);
+                if(isset($_POST['delete'])) {
+                    foreach($_POST['delete'] as $id => $state) {
+                        $this->dojo_model->delete($id, $state==="delete"?1:0, $this->tank_auth->get_user_id());
+                    }
+                    $this->load->view('template/alert', array('type' => 'success', 'title' => 'Deleted Dojos', 'message' => ''));
+                }
+                $data['dojos'] = $this->dojo_model->get_with_user(null, null, true);
 				$this->load->view('admin/dojo', $data);
 			} else {
 				$data['type'] =  "error";

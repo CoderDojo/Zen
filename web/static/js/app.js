@@ -43,7 +43,7 @@ function codeAddress(myLocation) {
 		  latitude: results[0].geometry.location.lat(),
 		  longitude: results[0].geometry.location.lng()
 	  },data);
-	  document.getElementById('closest-location').innerHTML = "<a href='http://zen.coderdojo.com/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> which is "+(closest.distance/1000).toFixed(1)+"KM away.";
+	  document.getElementById('closest-location').innerHTML = "<a href='//zen.coderdojo.com/dojo/"+data[closest.key].id+"'>"+closest.key+"</a> which is "+(closest.distance/1000).toFixed(1)+"KM away.";
 	  document.getElementById('closest-title').style.display = "inherit";
 	  document.getElementById('closest-location').style.display = "inherit";
     map.setCenter(new google.maps.LatLng(closest.latitude,closest.longitude));
