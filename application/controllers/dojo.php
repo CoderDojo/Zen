@@ -120,7 +120,7 @@ class Dojo extends CI_Controller
 					$this->form_validation->set_value('stage'),
 					$this->form_validation->set_value('supporter_image'),
 					$data['user_data']->user_id,
-					$this->form_validation->set_value('private')
+					$this->form_validation->set_value('private')?1:0
 					))) {									// success
 					    $this->load->library('email');
                         $this->email->from($data['user_data']->email);
@@ -222,7 +222,7 @@ class Dojo extends CI_Controller
 					$this->form_validation->set_value('need_mentors'),
 					$this->form_validation->set_value('stage'),
 					$this->form_validation->set_value('supporter_image'),
-    				$this->form_validation->set_value('private')
+    				$this->form_validation->set_value('private')?1:0
 					))) {									// success
 
 						redirect('/dojo/'.$dojo_id);

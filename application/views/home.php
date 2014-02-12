@@ -47,13 +47,10 @@ function refreshMap() {
 		    }
     	  });
     google.maps.event.addListener(marker, 'click', function() {
-        console.log(this);
-		var findYours = document.getElementById('find-yours-box');
-		findYours.className = findYours.className + " hidden";
-		var foundYours = document.getElementById('found-yours-box');
-		foundYours.className = foundYours.className.replace("hidden", "");
-		document.getElementById('founddojoname').innerHTML = this.title + (this.dojoId.private?" <b>(PRIVATE)</b>":"");
-		document.getElementById('founddojoname').href = "/dojo/"+this.dojoId.id;
+        var close = "<h1 style='line-height:2em;'>The dojo you clicked is:</h1>";
+        close += "<h2 style='line-height:1.7em;'><a href='/dojo/"+this.dojoId.id+"'>"+this.title+"</a> "+(this.dojoId.private?"<b>(PRIVATE)</b>":"")+"</h2>";
+        document.getElementById('closeness').innerHTML = close;
+        document.getElementById('closeness').style.display = "inherit";
     });
     markers.push(marker);
   }

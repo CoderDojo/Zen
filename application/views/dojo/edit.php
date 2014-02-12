@@ -133,7 +133,7 @@ $supporter_image = array(
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="email" name="email" value="<?=$email['value'];?>">
                             <div class="error-text"> <?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></div>
-                            <p class="help-block">This should be different to the personal email you signed up for an account here with. For your own CoderDojo email address (Eg. <i>limerick@coderdojo.com</i>), please <a href="mailto:enquiries@coderdojo.com">contact us</a>.</p>
+                            <p class="help-block">This should be different to the personal email you signed up for an account here with. For your own CoderDojo email address (Eg. <i>limerick.ie@coderdojo.com</i>), please <a href="mailto:enquiries@coderdojo.com">contact us</a>.</p>
                         </div>
                     </div>
                     <div class="control-group">
@@ -262,7 +262,7 @@ $supporter_image = array(
                             <label class="checkbox inline" style="margin-top: -5px; margin-left: -28px;">
                                 <?=form_checkbox($private);?>
                             </label>
-                            <p class="help-block">If your Dojo is private you will not appear on the map or be searchable but your listing will appear on the <a href="/dojo">Dojo list</a>. This is because currently the map can only return one result and this could cause issues for people searching for Dojos.</p>
+                            <p class="help-block">Please only select if your Dojo will be accessible exclusively to attendees from within your organisation. eg. schools/universities/children of organisation's employees etc.</p>
                         </div>
                     </div>
                 </div>
