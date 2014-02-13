@@ -67,8 +67,7 @@ class Dojo_Model extends CI_Model
 		$this->db->join("charter_agreement", "users.id = charter_agreement.user_id", 'left outer');
 		
 		$this->load->model("charter_model");
-		$this->db->where("charter_agreement.agreement_version",Charter_Model::AGREEMENT_VERSION);
-		$this->db->or_where("charter_agreement.agreement_version IS NULL");
+		$this->db->where("(charter_agreement.agreement_version = ".Charter_Model::AGREEMENT_VERSION." OR charter_agreement.agreement_version IS NULL)");
 		
 		$this->db->order_by('dojos.id desc');
 		$query = $this->db->get($this->dojo_table);

@@ -38,7 +38,7 @@ class Admin extends CI_Controller
                     }
                     $this->load->view('template/alert', array('type' => 'success', 'title' => 'Deleted Dojos', 'message' => ''));
                 }
-                $data['dojos'] = $this->dojo_model->get_with_user(null, null, true);
+                $data['dojos'] = $this->dojo_model->get_with_user(null, false, true);
 				$this->load->view('admin/dojo', $data);
 			} else {
 				$data['type'] =  "error";
