@@ -215,7 +215,7 @@ class Dojo_Model extends CI_Model
         }
 	}
 	function verified_by($dojo, $user) {
-        $this->db->set('verified_at', 'NOW()');
+        $this->db->set('verified_at', "NOW()", false);
         $this->db->set('verified_by', $user);
 
         $this->db->where('id', $dojo);
