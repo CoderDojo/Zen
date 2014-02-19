@@ -6,6 +6,11 @@
         <div id="chartertext">
             <?php $this->load->view('charter/charter_text.'.Charter_Model::AGREEMENT_VERSION.'.php'); ?>
             <div class="control-group">
+                <div class="controls">
+                    <div class="help-text">If you do not agree with the charter, <b>do not</b> fill in this form or press the "I have read &amp; agree to the Charter" button. Email us <a href="mailto:hello@hwf.io">hello@hwf.io</a> and we can discuss.</div>
+                </div>
+            </div>
+            <div class="control-group">
                 <label class="control-label" for="name">Your Full Name</label>
                 <div class="controls">
                     <input type="text" class="input-xlarge" id="name" name="name" value="<?php echo set_value("name"); ?>">

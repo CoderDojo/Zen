@@ -277,7 +277,10 @@ $supporter_image = array(
         </form>
     </div><!--.wrap-->
 </div><!--#content-->
-
+<script type="text/javascript" src="/static/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    CKEDITOR.replace( 'notes' );
+</script>
 <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 var map, marker;

@@ -204,17 +204,27 @@ class Dojo_Model extends CI_Model
     {
         if($dojo){
             $this->db->set('verified', $state);
-            if($state == 1) {
-              $this->db->set('verified_at', "NOW()", false);
-              $this->db->set('verified_by', $user);
-            }
-    
+
             $this->db->where('id', $dojo);
 
             $this->db->where('deleted',0);
             $this->db->update($this->dojo_table);
+            if($state == 1) {
+                $this->verified_by($dojo, $user);
+            }
         }
 	}
+	function verified_by($dojo, $user) {
+        $this->db->set('verified_at', 'NOW()');
+        $this->db->set('verified_by', $user);
+
+        $this->db->where('id', $dojo);
+        $this->db->where('verified_at IS NULL');
+        $this->db->where('verified_by IS NULL');
+        $this->db->where('deleted',0);
+        
+        $this->db->update($this->dojo_table);
+    }
 	
 	function delete($dojo, $state, $user)
     {
@@ -243,6 +253,35 @@ class Dojo_Model extends CI_Model
 		$query = $this->db->get($this->user_dojo_table);
 		return $query->num_rows()===0?false:true;
 	}
+	
+	function dojo_count($where = array()) {
+	    $default_where = array(
+	       'deleted' => 0,
+	       'verified' => 1
+	    );
+	    $where_f = array_merge($default_where, $where);
+		foreach($where_f as $key => $val) {
+		    $this->db->where($key,$val,true);
+		}
+		$this->db->select('id');
+		$r = $this->db->get('dojos');
+		return $r->num_rows();
+    }
+	function country_count($where = array()) {
+	    $default_where = array(
+	       'deleted' => 0,
+	       'verified' => 1
+	    );
+	    $where_f = array_merge($default_where, $where);
+		foreach($where_f as $key => $val) {
+		    $this->db->where($key,$val,true);
+		}
+		
+		$this->db->distinct();
+		$this->db->select('country');
+		$r = $this->db->get('dojos');
+		return $r->num_rows();
+    }
 
 	/**
 	 * Get error message.
