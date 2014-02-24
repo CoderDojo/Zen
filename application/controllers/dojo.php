@@ -167,11 +167,7 @@ class Dojo extends CI_Controller
 	function edit($id)
 	{
       $this->load->model(array('charter_model'));
-      if(!Charter_Model::userHasSigned($this->tank_auth->get_user_data()->user_id)) {
-          $this->session->set_userdata('c_redirect_from', '/dojo/edit/'.$id);
-          redirect('/charter/sign');
-      }
-
+      
 	  if(!isset($id)) echo "<script type='text/javascript'>window.location = \"/dojo/my\";</script>";
 		if(!$this->tank_auth->is_logged_in()){
 			redirect("auth/login");

@@ -104,7 +104,7 @@ class Admin extends CI_Controller
 			$this->load->view('template/header', $data);
 
 			if ($data['user_data']->role == 0){
-                /*if(isset($_POST['verify'])){
+                if(isset($_POST['verify'])){
                     foreach($_POST['verify'] as $id => $state) {
                         $this->dojo_model->verify($id, $state, $this->tank_auth->get_user_id());
                     }
@@ -115,7 +115,7 @@ class Admin extends CI_Controller
                         $this->dojo_model->delete($id, $state==="delete"?1:0, $this->tank_auth->get_user_id());
                     }
                     $this->load->view('template/alert', array('type' => 'success', 'title' => 'Deleted Dojos', 'message' => ''));
-                }*/
+                }
                 $data['dojos'] = $this->dojo_model->get_with_user(null, true);
 				$this->load->view('admin/dojo', $data);
 			} else {
