@@ -38,7 +38,7 @@
             <?php } if($dojo_data[0]->eb_id) { ?>
             <legend>Booking</legend>
             <div style="width:550px; text-align:left; margin-left: 37px;">
-                <iframe  src="//www.eventbrite.com/tickets-external?eid=<?=$dojo_data[0]->eb_id; ?>&ref=etckt" frameborder="0" height="224" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
+                <iframe  src="//www.eventbrite.com/tickets-external?eid=<?=$dojo_data[0]->eb_id; ?>&ref=etckt" frameborder="0" height="100%" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
             </div>
             <?php } if($dojo_data[0]->supporter_image) { ?>
             <legend>Dojo Supported By</legend>
