@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -21,6 +21,8 @@
  * @category	Database
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
+ * @param 	string
+ * @param 	bool	Determines if active record should be used or not
  */
 function &DB($params = '', $active_record_override = NULL)
 {
@@ -35,7 +37,7 @@ function &DB($params = '', $active_record_override = NULL)
 				show_error('The configuration file database.php does not exist.');
 			}
 		}
-		
+
 		include($file_path);
 
 		if ( ! isset($db) OR count($db) == 0)

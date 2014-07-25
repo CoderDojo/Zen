@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -37,7 +37,7 @@ class CI_Controller {
 	public function __construct()
 	{
 		self::$instance =& $this;
-		
+
 		// Assign all the class objects that were instantiated by the
 		// bootstrap file (CodeIgniter.php) to local class variables
 		// so that CI can run as one big super object.
@@ -48,7 +48,7 @@ class CI_Controller {
 
 		$this->load =& load_class('Loader', 'core');
 
-		$this->load->set_base_classes()->ci_autoloader();
+		$this->load->initialize();
 		
 		log_message('debug', "Controller Class Initialized");
 	}

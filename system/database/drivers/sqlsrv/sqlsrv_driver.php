@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -344,6 +344,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 			return '0';
 
 		$row = $query->row();
+		$this->_reset_select();
 		return $row->numrows;
 	}
 
@@ -535,7 +536,7 @@ class CI_DB_sqlsrv_driver extends CI_DB {
 	 */
 	function _truncate($table)
 	{
-		return "TRUNCATE ".$table;
+		return "TRUNCATE TABLE ".$table;
 	}
 
 	// --------------------------------------------------------------------

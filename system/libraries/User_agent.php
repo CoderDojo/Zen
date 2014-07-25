@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -142,7 +142,7 @@ class CI_User_agent {
 	{
 		$this->_set_platform();
 
-		foreach (array('_set_browser', '_set_robot', '_set_mobile') as $function)
+		foreach (array('_set_robot', '_set_browser', '_set_mobile') as $function)
 		{
 			if ($this->$function() === TRUE)
 			{
