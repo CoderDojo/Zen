@@ -159,7 +159,7 @@ class Admin extends CI_Controller
 				$this->form_validation->set_rules('notes', 'Notes', 'trim|xss_clean');
 				$this->form_validation->set_rules('need_mentors', 'Need Mentors', 'trim|xss_clean');
 				$this->form_validation->set_rules('stage', 'Stage', 'trim|xss_clean|is_natural');
-				$this->form_validation->set_rules('supporter_image', 'Supporter Image', 'trim|xss_clean|prep_url');
+				$this->form_validation->set_rules('supporter_image', 'Supporter Image', 'trim|prep_url');
 				$this->form_validation->set_rules('private', 'Private', 'trim|xss_clean');
 
 				$data['errors'] = array();
