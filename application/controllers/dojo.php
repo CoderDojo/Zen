@@ -301,7 +301,9 @@ class Dojo extends CI_Controller
                 "latitude" => (float) substr(trim($coord[0]),0,10),
                 "longitude" => (float) substr(trim($coord[1]),0,10),
                 "id" => (int) $dojo['id'],
-                "private" => (bool) $dojo['private']
+                "private" => (bool) $dojo['private'],
+                "location" => $dojo['location'],
+                "time" => $dojo['time'],
               );
             }
             $display_map = $map;
@@ -309,7 +311,7 @@ class Dojo extends CI_Controller
 	      }
 	      header('Content-type: application/json');
 	      echo $this->input->get('callback')?$this->input->get('callback').'(':'';
-          echo json_encode($display_map);
+        echo json_encode($display_map);
 	      echo $this->input->get('callback')?')':'';
 	}
 	
@@ -339,7 +341,9 @@ class Dojo extends CI_Controller
             ),
             'properties' => array(
               'name' => $dojo['name'],
-              "private" => (bool) $dojo['private']
+              "private" => (bool) $dojo['private'],
+              "location" => $dojo['location'],
+              "time" => $dojo['time']
             )
           );
         }
