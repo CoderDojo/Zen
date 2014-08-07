@@ -145,27 +145,11 @@ class Admin extends CI_Controller
 			    //check if the has a Dojo
     			$this->load->view('template/header', $data);
                 
-                //set validation rules
-				$this->form_validation->set_rules('dojo_name', 'Dojo Name', 'trim|required|xss_clean|min_length[4]|max_length[100]|htmlspecialchars');
-				$this->form_validation->set_rules('email', 'Email', 'trim|xss_clean|valid_email|required');
-				$this->form_validation->set_rules('google_group', 'Google Group URL', 'trim|xss_clean|prep_url');
-				$this->form_validation->set_rules('website', 'Website', 'trim|xss_clean|prep_url');
-				$this->form_validation->set_rules('twitter', 'Twitter', 'trim|xss_clean|htmlspecialchars');
-				$this->form_validation->set_rules('time', 'Time', 'trim|xss_clean|htmlspecialchars');
-				$this->form_validation->set_rules('country', 'Country', 'trim|required|xss_clean|callback_is_country');
-				$this->form_validation->set_rules('location', 'Location', 'trim|xss_clean|htmlspecialchars');
-				$this->form_validation->set_rules('coordinates', 'Co-ordinates', 'trim|xss_clean');
-				$this->form_validation->set_rules('eb_id', 'EventBrite ID', 'trim|xss_clean');
-				$this->form_validation->set_rules('notes', 'Notes', 'trim|xss_clean');
-				$this->form_validation->set_rules('need_mentors', 'Need Mentors', 'trim|xss_clean');
-				$this->form_validation->set_rules('stage', 'Stage', 'trim|xss_clean|is_natural');
-				$this->form_validation->set_rules('supporter_image', 'Supporter Image', 'trim|prep_url');
-				$this->form_validation->set_rules('private', 'Private', 'trim|xss_clean');
 
 				$data['errors'] = array();
 				$data['dojo_data'] = $this->dojo_model->get($id);
 
-				if ($this->form_validation->run()) { // validation ok
+				if ($this->form_validation->run('dojo')) { // validation ok
 
 					if (!is_null($dojo_id = $this->dojo_model->update(
 					$id,
