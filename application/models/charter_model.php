@@ -37,6 +37,9 @@ class Charter_Model extends CI_Model
     }
 
     public function save() {
+        // If timestamp isn't set, then set it
+        if(!isset($this->timestamp)) $this->timestamp = date('Y-m-d H:i:s');
+        
         if(!isset($this->id)) {
             if($this->db->insert('charter_agreement',$this)) {
                 $this->id = $this->db->insert_id();
