@@ -42,7 +42,7 @@ $route['default_controller'] = "home/index";
 $route['404_override'] = '';
 $route['profile/(:any)'] = "profile";
 
-$route['dojo/:num'] = "dojo/lookup";
+$route['dojo/(:num)'] = "dojo/lookup/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
