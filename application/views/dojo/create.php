@@ -118,10 +118,10 @@ $supporter_image = array(
     <div class="wrap">        
         <form method="post" action="/dojo/create" class="form-horizontal">
             <div id="main">
-<!--                 <div class="alert alert-block">
+                 <div class="alert alert-block">
                       <h4 class="alert-heading">Pre-game warning!</h4>
-                      Please please please, make sure this is not a duplicate Dojo. Check out the list here of <a href="/dojo">verified existing Dojos here</a> and make sure you corresponding with people in your Dojo before creating this. Otherwise we'll have to delete the listing, grab our pitchforks and come after you! Later on we will be adding support for you to claim membership to a Dojo and whatnot.
-                </div>-->
+                      <p>Before you sign up to create a listing for your Dojo please complete our <a href="https://docs.google.com/forms/d/1feHIF22k9pJjPSiYVTubWFWNkdMlVTW4Z7OKBUlhhFs/viewform?usp=send_form" target="_BLANK">New Champion Registration Form</a> , if you have not already.</p>
+                </div>
                 <p>Fields marked with * are required before your listing can be verified and displayed publicly.</p>
                 <fieldset>
                     <legend>Dojo Information</legend>
