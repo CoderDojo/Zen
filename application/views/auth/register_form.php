@@ -75,6 +75,7 @@ $captcha = array(
                 </div>
             </div>
 
+            <?php if($use_recaptcha): ?>
              <div class="control-group">
                 <label class="control-label" for="recaptcha_response_field">Are you human?</label>
                 <div class="controls">
@@ -92,6 +93,7 @@ $captcha = array(
                     <?php echo $recaptcha_html; ?>
                 </div>
             </div>
+            <?php endif; ?>
 
             <div class="control-group">
                 <div class="controls">
