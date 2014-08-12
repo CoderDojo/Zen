@@ -116,7 +116,7 @@ $supporter_image = array(
 ?>
 <div id="content">
     <div class="wrap">      
-        <form method="post" action="/<?=(isset($is_admin)?'admin':'dojo')?>/edit/<?=$id?>" class="form-horizontal">
+        <form method="post" action="/<?=((isset($is_admin) && $is_admin)?'admin':'dojo')?>/edit/<?=$id?>" class="form-horizontal">
             <div id="main">
                 <fieldset>
                     <legend>Dojo Information</legend>
