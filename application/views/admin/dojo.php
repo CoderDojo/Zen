@@ -2,6 +2,7 @@
     <div class="mainpage">
             <legend><?=$pagename?> Dojos</legend>
             <form action="/admin/" method="post">
+                <input type="submit" name="submit" value="Done" class="btn-primary" style="float:right;">
                 <table id="vfy-dojo-table" class="table">
                     <thead>
                         <tr>
