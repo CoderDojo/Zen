@@ -20,8 +20,7 @@ class Api extends CI_Controller
             $this->cache->save('dojocount',$response,120);
         }
         $this->output
-            ->set_header('Access-Control-Allow-Origin: http://*.coderdojo.com')
-            ->set_header('Access-Control-Allow-Origin: http://coderdojo.com')
+            ->set_header('Access-Control-Allow-Origin: *')
             ->set_content_type('application/json')
             ->set_output(json_encode($response));
     }
