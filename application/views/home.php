@@ -43,7 +43,7 @@ function refreshMap() {
     	    title: i,
     		clickable: true,
     		icon: {
-    		    url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"+(data[i].private?'FF3333':'33FF33')
+    		    url: "https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"+(data[i].private?'FF3333':'33FF33')
 		    }
     	  });
     google.maps.event.addListener(marker, 'click', function() {
