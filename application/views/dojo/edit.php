@@ -254,6 +254,12 @@ $supporter_image = array(
                             <?=form_radio($stage, 3, set_radio('stage', '3', ($dojo_data[0]->stage==3)?TRUE:''));?>
                             Full up
                           </label>
+								  <?php if(isset($data['is_admin']) && $data['is_admin'] == true): ?>
+                          <label class="radio">
+                            <?=form_radio($stage, 4, set_radio('stage', '4', ($dojo_data[0]->stage==4)?TRUE:''));?>
+                            Inactive
+                          </label>
+							  	  <?php endif; ?>
                         </div>
                     </div>
                     <div class="control-group" style="margin-left: -40px;">
