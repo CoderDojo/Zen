@@ -18,7 +18,12 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+	if($_SERVER['HTTP_HOST'] == 'zen.coderdojo.com') {
+		define('ENVIRONMENT', 'production');
+	} else {
+		define('ENVIRONMENT', 'development');
+	}
+	date_default_timezone_set('UTC');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

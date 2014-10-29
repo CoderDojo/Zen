@@ -44,7 +44,7 @@ Temporary Items
 
 ### CodeIgniter ###
 application/config/production
-application/cache/*
 application/cache/!index.html
 application/cache/!.htaccess
+application/cache/*
 
