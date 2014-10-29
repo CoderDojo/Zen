@@ -5,7 +5,7 @@
 	<h1>Find your Dojo</h1>
 	<p>Just enter your exact (closest town, or exact address) location in the box below and we'll find your closest dojo</p>
 	<div id="find-yours-form">
-		<input type="text" id="location" placeholder="Where are you?">
+		<input type="text" id="location" placeholder="Where are you?" value="<?php echo $this->input->get('location') ?>">
 	</div>
 	<div id="closeness" class="hidden">
 	    <h1 style="line-height:2em;" id="closest-title">Your dojo is</h1>
@@ -138,6 +138,13 @@ function codeAddress(myLocation) {
 google.maps.event.addDomListener(window, 'load', initialize);
 google.maps.event.addDomListener(window, 'load',function() {
 	el = document.getElementById("location");
+	
+	// If a location is already specified then display that
+	if(el.value != '') {
+		codeAddress(el.value);
+	}
+	
+	// Attach Event Listener
 	if(el.addEventListener) {
 		el.addEventListener('change',function(){
 			myLocation = this.value;

@@ -17,8 +17,8 @@
       ga('send', 'pageview');
 
     </script>
-		<script>
-			(function(){var a=document.createElement('script');a.src='https://coderdojo.org/globalmenu/coderdojomenu.min.js';document.body.appendChild(a)})();
-		</script>
+    <script>
+	(function(){var a=document.createElement('script');a.src='https://coderdojo.org/globalmenu/coderdojomenu.min.js';document.body.appendChild(a)})();
+    </script>
     </body>
 </html>
