@@ -43,7 +43,7 @@ Temporary Items
 .apdisk
 
 ### CodeIgniter ###
-application/config/development
+application/config/production
 application/cache/*
 application/cache/!index.html
 application/cache/!.htaccess
