@@ -6,6 +6,7 @@ class Api extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model(array('dojo_model'));
+		$this->load->helper(array('url'));
 	}
     
     function stats() {
@@ -57,7 +58,7 @@ class Api extends CI_Controller
               );
             }
             $display_map = $map;
-            $this->cache->save('map',$map,300);
+            $this->cache->save('api_map',$map,300);
 	      }
 	      header('Content-type: application/json');
 	      echo $this->input->get('callback')?$this->input->get('callback').'(':'';
@@ -106,5 +107,44 @@ class Api extends CI_Controller
         echo $this->input->get('callback')?$this->input->get('callback').'(':'';
         echo json_encode($display_map);
         echo $this->input->get('callback')?')':'';
+    }
+		
+		/*** Code.org ***/
+    public function codedotorg() {
+      $this->load->driver('cache', array('adapter' => 'file'));
+	    
+	      if(!$display_map = $this->cache->get('api_codedotorg')) {
+	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('private' => false));
+            $map = array();
+            
+            $count = 0;
+
+            foreach($db_dojos as $dojo) {
+              $dojo = (array) $dojo;
+              $map[] = array(
+								"class_description" => "@TODO",
+								"class_format" => "out_of_school_other",
+								"class_format_other" => "",
+								"class_languages" => "@TODO",
+								"class_languages_other" => "",
+								"school_name" => $dojo['name'],
+								"school_address" => $dojo['location'],
+								"school_website" => site_url('/dojo/'.$dojo['id'].'?utm_source=codedotorg&utm_medium=listing'),
+								"school_level" => "@TODO",
+								"school_gender" => "both",
+								"school_tuition" => "no",
+								"contact_name" => "",
+								"contact_email" => "",
+								"contact_phone" => "",
+								"email_address" => "webteam@coderdojo.com"
+              );
+            }
+            $display_map = $map;
+            $this->cache->save('api_codedotorg',$map,300);
+	      }
+	      header('Content-type: application/json');
+	      echo $this->input->get('callback')?$this->input->get('callback').'(':'';
+        echo json_encode($display_map);
+	      echo $this->input->get('callback')?')':'';
     }
 }
