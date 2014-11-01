@@ -43,6 +43,7 @@ $route['404_override'] = '';
 $route['profile/(:any)'] = "profile";
 
 $route['dojo/(:num)'] = "dojo/lookup/$1";
+$route['dojo/(:any)/(:any)'] = "dojo/lookup_by_name/$1/$2";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

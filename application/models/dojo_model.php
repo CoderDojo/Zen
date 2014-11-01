@@ -84,6 +84,14 @@ class Dojo_Model extends CI_Model
 		return $query->result();
 	}
 
+	function get_id_from_slug($country,$slug) {
+		$this->db->select('id');
+		$this->db->where('country', $country);
+		$this->db->where('url_slug', $slug);
+		$query = $this->db->get($this->dojo_table);
+		return $query->result();
+	}
+
 	/**
 	 * Create a dojo listing
 	 *

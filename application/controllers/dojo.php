@@ -51,6 +51,12 @@ class Dojo extends MY_Controller
 		
 		$this->load_view('dojo/profile');
 	}
+	public function lookup_by_name($country,$name)
+	{
+		$r = $this->dojo_model->get_id_from_slug($country,$name);
+		$this->lookup($r[0]->id);
+	}
+	
 
 	public function create()
 	{
