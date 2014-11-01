@@ -64,7 +64,7 @@ class Dojo extends MY_Controller
 			echo 'MISS';
 			$r = $this->dojo_model->get_id_from_slug($country,$name);
 			$id = $r[0]->id;
-			$this->cache->save('zennamecache-'.$country.'-'.$name, $id, 10);
+			$this->cache->save('zennamecache-'.$country.'-'.$name, $id, 2592000);
 		}
 		if(count($id) > 0) {
 			$this->lookup($id,true);
