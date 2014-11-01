@@ -61,7 +61,6 @@ class Dojo extends MY_Controller
 	{
 		$this->load->driver('cache', array('adapter' => 'memcached'));
 		if(!$id = $this->cache->get('zennamecache-'.$country.'-'.$name)) {
-			echo 'MISS';
 			$r = $this->dojo_model->get_id_from_slug($country,$name);
 			$id = $r[0]->id;
 			$this->cache->save('zennamecache-'.$country.'-'.$name, $id, 2592000);
