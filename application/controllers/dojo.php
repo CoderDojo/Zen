@@ -37,13 +37,13 @@ class Dojo extends MY_Controller
 			show_404('dojo/404');
 			return false;
 		}
-		if(!$named) {
+		/*if(!$named) {
 			$slug = $this->view_data['dojo_data'][0]->url_slug;
 			$country = strtolower($this->view_data['dojo_data'][0]->country);
 			if($slug !== NULL) {
 				redirect('/dojo/'.$country.'/'.$slug);
 			}
-		}
+		}*/
 		
 		$this->view_data['dojo_name'] = $this->view_data['dojo_data'][0]->name;
 		if($this->view_data['dojo_data'][0]->verified == 1) {
