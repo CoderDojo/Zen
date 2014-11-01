@@ -8,7 +8,7 @@ class Dojo extends MY_Controller
 	{
 		parent::__construct();
 
-		$this->load->helper(array('form', 'url'));
+		$this->load->helper(array('form', 'url','country'));
 		$this->load->library(array('form_validation','tank_auth'));
 		$this->load->model(array('dojo_model'));
 	}
@@ -30,13 +30,19 @@ class Dojo extends MY_Controller
 		$this->load_view('dojo/dojo');
 	}
 
-	public function lookup($id)
+	public function lookup($id,$named = false)
 	{
 		$this->view_data['dojo_data'] = $this->dojo_model->get($id);
 		if(!$this->view_data['dojo_data']) {
-			$this->output->set_status_header('404');
-			$this->load_view('dojo/404');
+			show_404('dojo/404');
 			return false;
+		}
+		if(!$named) {
+			$slug = $this->view_data['dojo_data'][0]->url_slug;
+			$country = strtolower($this->view_data['dojo_data'][0]->country);
+			if($slug !== NULL) {
+				redirect('/dojo/'.$country.'/'.$slug);
+			}
 		}
 		
 		$this->view_data['dojo_name'] = $this->view_data['dojo_data'][0]->name;
@@ -53,11 +59,20 @@ class Dojo extends MY_Controller
 	}
 	public function lookup_by_name($country,$name)
 	{
-		$r = $this->dojo_model->get_id_from_slug($country,$name);
-		$this->lookup($r[0]->id);
+		$this->load->driver('cache', array('adapter' => 'memcached'));
+		if(!$id = $this->cache->get('zennamecache-'.$country.'-'.$name)) {
+			echo 'MISS';
+			$r = $this->dojo_model->get_id_from_slug($country,$name);
+			$id = $r[0]->id;
+			$this->cache->save('zennamecache-'.$country.'-'.$name, $id, 10);
+		}
+		if(count($id) > 0) {
+			$this->lookup($id,true);
+		} else {
+			show_404('dojo/404');
+		}
 	}
 	
-
 	public function create()
 	{
 		$this->require_charter();
