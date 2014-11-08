@@ -16,7 +16,7 @@
 	<h2 style="line-height:2em;">The Dojo you selected is</h2>
 	<h1 style="line-height:1.7em;"><a href="/dojo/{{dojo.id}}" id="founddojoname">{{dojo.name}}</a></h1>
 </div>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript" src="/static/js/geolib.js"></script>
 <script type="text/javascript" src="/static/js/markercluster.js"></script>
 <script type="text/javascript">
@@ -71,6 +71,7 @@ function initialize() {
 	scrollwheel: false
   };
   map = new google.maps.Map(document.getElementById("map-box"), mapOptions);
+  var autocomplete = new google.maps.places.Autocomplete(document.getElementById("location"));
   refreshMap()
 }
 
