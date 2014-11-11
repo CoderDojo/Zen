@@ -71,7 +71,6 @@ function initialize() {
 	scrollwheel: false
   };
   map = new google.maps.Map(document.getElementById("map-box"), mapOptions);
-  var autocomplete = new google.maps.places.Autocomplete(document.getElementById("location"));
   refreshMap()
 }
 
