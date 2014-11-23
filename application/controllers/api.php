@@ -122,21 +122,18 @@ class Api extends CI_Controller
             foreach($db_dojos as $dojo) {
               $dojo = (array) $dojo;
               $map[] = array(
-								"class_description" => "@TODO",
-								"class_format" => "out_of_school_other",
-								"class_format_other" => "",
-								"class_languages" => "@TODO",
-								"class_languages_other" => "",
-								"school_name" => $dojo['name'],
-								"school_address" => $dojo['location'],
-								"school_website" => site_url('/dojo/'.$dojo['id'].'?utm_source=codedotorg&utm_medium=listing'),
-								"school_level" => "@TODO",
-								"school_gender" => "both",
-								"school_tuition" => "no",
-								"contact_name" => "",
-								"contact_email" => "",
-								"contact_phone" => "",
-								"email_address" => "webteam@coderdojo.com"
+                  "id" => $dojo['id'],
+                  "class_description" => "A Dojo is a environment where young people and technology experts come together to explore technology in a fun, safe and social space.  Please use the contact details on our website to contact us about attending and the languages covered at our Dojo.",
+                  "class_format" => "out_of_school_other",
+                  "class_format_other" => "Informal weekend sessions",
+                  "class_languages" => "Scratch, JavaScript, PHP, Ruby,C++, Arduino",
+                  "school_name" => $dojo['name'],
+                  "school_address" => $dojo['location'],
+                  "school_website" => site_url('/dojo/'.$dojo['id'].'?utm_source=codedotorg&utm_medium=listing'),
+                  "school_level" => "elementary, middle_school, high_school",
+                  "school_gender" => "both",
+                  "school_tuition" => "no",
+                  "email_address" => "webteam@coderdojo.com"
               );
             }
             $display_map = $map;
