@@ -114,7 +114,7 @@ class Api extends CI_Controller
       $this->load->driver('cache', array('adapter' => 'file'));
 	    
 	      if(!$display_map = $this->cache->get('api_codedotorg')) {
-	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('private' => false));
+	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('private' => false, 'stage !=' => '4'));
             $map = array();
             
             $count = 0;
