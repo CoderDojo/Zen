@@ -8,6 +8,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Dojo</th>
+                            <th>Stage</th>
                             <th>Country</th>
                             <th>Email</th>
                             <th>User</th>
@@ -21,6 +22,7 @@
                         <tr>
                             <td><a href="/dojo/<?=$dojo->dojoid;?>" target="_blank"><?=$dojo->dojoid;?></a></td>
                             <td><a href="/dojo/<?=$dojo->dojoid;?>" target="_blank"><?=$dojo->name;?></a></td>
+                            <td><?=$dojo->stage;?></td>
                             <td><?=$dojo->country;?></td>
                             <td><?=$dojo->dojoemail;?></td>
                             <td><a href="https://hwf.zendesk.com/tickets/new?email=<?=urlencode($dojo->useremail);?>&ticket[set_collaborators]=<?=urlencode($dojo->dojoemail);?>&ticket[subject]=<?=urlencode($dojo->name);?>&ticket[status]=pending&ticket[type]=question&ticket[priority]=normal&ticket[group_id]=21222293" target="_blank" title="Open a Ticket" style="color: #<?=$dojo->charter==Charter_Model::AGREEMENT_VERSION?'33CC33':'CC3333';?>"><?=$dojo->useremail;?></a></td>
