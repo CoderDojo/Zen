@@ -123,17 +123,17 @@ class Api extends CI_Controller
               $dojo = (array) $dojo;
               $map[] = array(
                   "id" => $dojo['id'],
-                  "class_description" => "A Dojo is a environment where young people and technology experts come together to explore technology in a fun, safe and social space.  Please use the contact details on our website to contact us about attending and the languages covered at our Dojo.",
-                  "class_format" => "out_of_school_other",
-                  "class_format_other" => "Informal weekend sessions",
-                  "class_languages" => "Scratch, JavaScript, PHP, Ruby,C++, Arduino",
-                  "school_name" => $dojo['name'],
-                  "school_address" => $dojo['location'],
-                  "school_website" => site_url('/dojo/'.$dojo['id'].'?utm_source=codedotorg&utm_medium=listing'),
-                  "school_level" => "elementary, middle_school, high_school",
-                  "school_gender" => "both",
-                  "school_tuition" => "no",
-                  "email_address" => "webteam@coderdojo.com"
+                  "class_description_s" => "A Dojo is a environment where young people and technology experts come together to explore technology in a fun, safe and social space.  Please use the contact details on our website to contact us about attending and the languages covered at our Dojo.",
+                  "class_format_s" => "out_of_school_other",
+                  "class_format_other_s" => "Informal weekend sessions",
+                  "class_languages_ss" => "Scratch, JavaScript, PHP, Ruby,C++, Arduino",
+                  "school_name_s" => $dojo['name'],
+                  "school_address_s" => $dojo['location'],
+                  "school_website_s" => site_url('/dojo/'.$dojo['id'].'?utm_source=codedotorg&utm_medium=listing'),
+                  "school_level_ss" => "elementary, middle_school, high_school",
+                  "school_gender_s" => "both",
+                  "school_tuition_s" => "no",
+                  "email_s" => "webteam@coderdojo.com"
               );
             }
             $display_map = $map;
