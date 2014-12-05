@@ -126,11 +126,20 @@ class Api extends CI_Controller
                   "class_description_s" => "A Dojo is a environment where young people and technology experts come together to explore technology in a fun, safe and social space.  Please use the contact details on our website to contact us about attending and the languages covered at our Dojo.",
                   "class_format_s" => "out_of_school_other",
                   "class_format_other_s" => "Informal weekend sessions",
-                  "class_languages_ss" => "Scratch, JavaScript, PHP, Ruby,C++, Arduino",
+                  "class_languages_ss" => [
+                      "Scratch", 
+                      "JavaScript", 
+                      "PHP", 
+                      "Ruby",
+                      "C++", 
+                      "Arduino"],
                   "school_name_s" => $dojo['name'],
                   "school_address_s" => $dojo['location'],
                   "school_website_s" => site_url('/dojo/'.$dojo['id'].'?utm_source=codedotorg&utm_medium=listing'),
-                  "school_level_ss" => "elementary, middle_school, high_school",
+                  "school_level_ss" => [
+                      "elementary", 
+                      "middle_school", 
+                      "high_school"],
                   "school_gender_s" => "both",
                   "school_tuition_s" => "no",
                   "email_s" => "webteam@coderdojo.com"
