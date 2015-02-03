@@ -7,7 +7,7 @@
         ?>CoderDojo Zen</title>
         <meta charset="UTF-8">
         <?php 
-            if(isset($dojo_name) && isset($dojo_data) && !empty($dojo_data[0]) && ($dojo_data[0]->private == 1 || $dojo_data[0]->private != 1)) {
+            if(isset($dojo_name) && isset($dojo_data) && !empty($dojo_data[0]) && ($dojo_data[0]->private == 1 || $dojo_data[0]->verified != 1)) {
                 echo '<meta name="robots" content="noindex, nofollow">'."\n";
             }   
         ?>
