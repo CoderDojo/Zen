@@ -4,6 +4,7 @@ class Dojo_Model extends CI_Model
 {
 	private $error = array();
 	private $dojo_table = "dojos";
+	private $country_table = "countries";
 	private $user_dojo_table = "user_dojos";
 
 	function __construct(){
@@ -37,6 +38,7 @@ class Dojo_Model extends CI_Model
 		
 		$this->db->where('deleted',0);
 		$this->db->order_by('country desc, name asc');
+        $this->db->join('countries',$this->country_table.'.alpha2 = '.$this->dojo_table.'.country');
 		$query = $this->db->get($this->dojo_table);
 		return $query->result();
 	}

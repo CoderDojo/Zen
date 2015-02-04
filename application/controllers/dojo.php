@@ -231,7 +231,10 @@ class Dojo extends MY_Controller
 					"id" => (int) $dojo['id'],
 					"private" => (bool) $dojo['private'],
 					"location" => $dojo['location'],
+					"country" => $dojo['alpha2'],
+					"continent" => $dojo['continent'],
 					"time" => $dojo['time'],
+                    "link" => site_url('/dojo/'.$dojo['id']),
 				);
 			}
 			$display_map = $map;
