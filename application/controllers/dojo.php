@@ -22,9 +22,10 @@ class Dojo extends MY_Controller
 		);
 		if(isset($_GET['filters']) && is_array($_GET['filters'])) {
 			$where = array_intersect_key($_GET['filters'],$filters);
-			$this->view_data['dojo_data'] = $this->dojo_model->get(NULL, TRUE, NULL, $where);
+            $wherea = array_merge(array('stage IN'=>'(1,2,3)'),$where);
+			$this->view_data['dojo_data'] = $this->dojo_model->get(NULL, TRUE, NULL, $wherea);
 		} else {
-			$this->view_data['dojo_data'] = $this->dojo_model->get(NULL, TRUE, NULL);
+			$this->view_data['dojo_data'] = $this->dojo_model->get(NULL, TRUE, NULL, array('stage IN (0,1,2,3)'=>NULL));
 		}
 		
 		$this->load_view('dojo/dojo');
@@ -217,7 +218,7 @@ class Dojo extends MY_Controller
 		$this->load->driver('cache', array('adapter' => 'file'));
 		
 		if(!$display_map = $this->cache->get('map')) {
-			$db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL));
+			$db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'stage !=' => 4));
 			$map = array();
 			
 			$count = 0;
@@ -253,7 +254,7 @@ class Dojo extends MY_Controller
 		$this->load->driver('cache', array('adapter' => 'file'));
 	
 		if(!$display_map = $this->cache->get('geojson_map')) {
-			$db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL));
+			$db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'stage !=' => 4));
 			$map = array(
 				'type' => 'FeatureCollection',
 				'features' => array()

@@ -38,7 +38,7 @@ class Api extends CI_Controller
       $this->load->driver('cache', array('adapter' => 'file'));
 	    
 	      if(!$display_map = $this->cache->get('api_map')) {
-	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'private' => false));
+	        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'private' => false, 'stage !=' => 4));
             $map = array();
             
             $count = 0;
@@ -70,7 +70,7 @@ class Api extends CI_Controller
       $this->load->driver('cache', array('adapter' => 'file'));
       
       if(!$display_map = $this->cache->get('api_geojson_map')) {
-        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'private' => false));
+        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('coordinates IS NOT NULL' => NULL, 'private' => false,  'stage !=' => 4));
           $map = array(
         'type' => 'FeatureCollection',
         'features' => array()
