@@ -254,7 +254,7 @@ class CountryCodes {
         'ZW' => 'Zimbabwe'
     );
     
-    static public $continent = array('AD' => 'Europe',
+    static public $continent_country = array('AD' => 'Europe',
     'AE' => 'Asia',
     'AF' => 'Asia',
     'AG' => 'North America',
@@ -505,7 +505,18 @@ class CountryCodes {
     'ZM' => 'Africa',
     'ZW' => 'Africa');
     
+    static public $continent = array(
+        'AF' => 'Africa',
+        'AN' => 'Antartica',
+        'EU' => 'Europe',
+        'AS' => 'Asia',
+        'OC' => 'Oceania',
+        'NA' => 'North America',
+        'SA' => 'South America'
+    );
 }
+
+
 
 function get_countries() {
     return CountryCodes::$country;
@@ -515,6 +526,10 @@ function get_country_name($cc) {
 }
 
 function get_continent_name($cc) {
+    return CountryCodes::$continent_country[$cc];
+}
+
+function real_get_continent_name($cc) {
     return CountryCodes::$continent[$cc];
 }
 

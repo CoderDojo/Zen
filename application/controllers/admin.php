@@ -51,7 +51,7 @@ class Admin extends CI_Controller
 		}
 	}
 	
-	function stats()
+	function old_stats()
 	{
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/auth/login/');
@@ -90,6 +90,49 @@ class Admin extends CI_Controller
 			$this->load->view('template/footer', $data);
 		}
 	}
+    
+    function stats()
+    {
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('/auth/login/');
+		} else {
+			$data['user_id']	= $this->tank_auth->get_user_id();
+			$data['username']	= $this->tank_auth->get_username();
+            $data['user_data'] =  $this->tank_auth->get_user_data();
+
+			$this->load->view('template/header', $data);
+
+			if ($data['user_data']->role == 0){
+                $q = $this->db->query('
+                    SELECT 
+                        `continent`, `alpha2` as \'country\', `country_name`, 
+                        COUNT(DISTINCT CASE WHEN (`verified` = 1 AND `stage` != 4) THEN `id` END) AS \'active_verified\',
+                        COUNT(DISTINCT CASE WHEN `verified` = 1 THEN `id` END) AS \'verified\',
+                        COUNT(DISTINCT `id`) as \'all\'
+                    FROM `dojos` d
+
+                    JOIN `countries` c
+                    ON d.`country` = c.`alpha2`
+                    
+                    WHERE d.`deleted` = 0
+
+                    GROUP BY c.`alpha2`
+                    ORDER BY c.`continent` ASC, c.`alpha2` ASC
+                ');
+		        foreach($q->result() as $row)
+                {
+                    $data['stats'][real_get_continent_name($row->continent)][get_country_name($row->country)] = array(
+                        'active_verified' => $row->active_verified,
+                        'verified' => $row->verified,
+                        'total' => $row->all
+                    );
+                }
+		        $data['charter'] = Charter_Model::count();
+                $this->load->view('admin/stats', $data);
+			}
+			$this->load->view('template/footer', $data);
+		}
+    }
 
 	function dojos()
 	{
