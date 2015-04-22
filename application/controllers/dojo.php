@@ -249,6 +249,47 @@ class Dojo extends MY_Controller
 					($this->input->get('callback')?')':'')
 				);
 	}
+
+        public function cpjson(){
+                $this->load->driver('cache', array('adapter' => 'file'));
+
+                if(!$display_map = $this->cache->get('cpjson')) {
+                        $db_dojos = $this->dojo_model->get(NULL, TRUE, FALSE, array('stage !=' => 4));
+                        $map = array();
+
+                        $count = 0;
+
+                        foreach($db_dojos as $dojo) {
+                                $dojo = (array) $dojo;
+                                $lat = null; $long = null;
+                                if($dojo['coordinates'] != NULL) {
+                                        $coord = explode(',',$dojo['coordinates']);
+                                        $lat = $coord ? substr(trim($coord[0]),0,10) : NULL;
+                                        $long = $coord ? substr(trim($coord[1]),0,10) : NULL;
+                                }
+                                $map[$dojo['name']] = array(
+                                        "latitude" => $lat,
+                                        "longitude" => $long,
+                                        "id" => (int) $dojo['id'],
+                                        "private" => (bool) $dojo['private'],
+                                        "location" => $dojo['location'],
+                                        "country" => $dojo['alpha2'],
+                                        "continent" => $dojo['continent'],
+                                        "time" => $dojo['time'],
+                    "link" => site_url('/dojo/'.$dojo['id']),
+                                );
+                        }
+                        $display_map = $map;
+                        $this->cache->save('map',$map,300);
+		}
+		$this->output
+				->set_content_type('application/json')
+				->set_output(
+					($this->input->get('callback')?$this->input->get('callback').'(':'') .
+					json_encode($display_map) .
+					($this->input->get('callback')?')':'')
+				);
+	}
 	
 	public function geojson(){
 		$this->load->driver('cache', array('adapter' => 'file'));
