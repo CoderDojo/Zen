@@ -18,7 +18,7 @@
 
     </script>
     <script>
-	(function(){var a=document.createElement('script');a.src='https://coderdojo.org/globalmenu/coderdojomenu.min.js';document.body.appendChild(a)})();
+	(function(){var a=document.createElement('script');a.src='https://coderdojo.com/globalmenu/coderdojomenu.min.js';document.body.appendChild(a)})();
     </script>
     </body>
 </html>
