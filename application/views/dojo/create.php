@@ -145,7 +145,7 @@ $supporter_image = array(
                         <label class="control-label" for="time">Times *</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="time" name="time" value="<?=$times['value'];?>">
-                            <div class="error-text"> <?php echo form_error($times['name']); ?><?php echo isset($errors[$times['name']])?$errors[$times['name']]:''; ?></div><p class="help-block"> State wether its every week or on a certain day (Eg. <i>"Every Friday, 5.30pm - 8pm"</i> or <i>"Saturday 25th, 12pm - 3pm"</i>)</p>
+                            <div class="error-text"> <?php echo form_error($times['name']); ?><?php echo isset($errors[$times['name']])?$errors[$times['name']]:''; ?></div><p class="help-block"> State whether its every week or on a certain day (Eg. <i>"Every Friday, 5.30pm - 8pm"</i> or <i>"Saturday 25th, 12pm - 3pm"</i>)</p>
                         </div>
                     </div>
 
