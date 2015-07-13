@@ -1,7 +1,7 @@
 <?php
 
 class CountryCodes {
-    
+
     static public $country = array(
         'AD' => 'Andorra',
         'AE' => 'United Arab Emirates',
@@ -185,7 +185,7 @@ class CountryCodes {
         'PM' => 'St. Pierre and Miquelon',
         'PN' => 'Pitcairn',
         'PR' => 'Puerto Rico',
-        'PS' => 'Palestinian Territory, Occupied',
+        'PS' => 'Palestine',
         'PT' => 'Portugal',
         'PW' => 'Palau',
         'PY' => 'Paraguay',
@@ -253,7 +253,7 @@ class CountryCodes {
         'ZM' => 'Zambia',
         'ZW' => 'Zimbabwe'
     );
-    
+
     static public $continent_country = array('AD' => 'Europe',
     'AE' => 'Asia',
     'AF' => 'Asia',
@@ -504,7 +504,7 @@ class CountryCodes {
     'ZA' => 'Africa',
     'ZM' => 'Africa',
     'ZW' => 'Africa');
-    
+
     static public $continent = array(
         'AF' => 'Africa',
         'AN' => 'Antartica',
