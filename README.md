@@ -1,3 +1,8 @@
+### Zen project
+Zen was redeveloped in 2015 and the new project [can be found at this repository](https://github.com/CoderDojo/community-platform/). Please consider contributing to the new project!
+
+This repository is here for historical/reference purposes.
+
 ### CoderDojo Zen
 Initially a basic Dojo listing manager. We plan to enhance and add features down 
 the line. You can help us make it better by forking this project, adding stuff and then issuing
